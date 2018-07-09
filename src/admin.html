@@ -5,15 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/default.css">
   <title>Document</title>
+  <style>
+    #uploadContainer{
+      height: 200px;
+      width: 200px;
+      border: 1px solid red;
+    }
+  </style>
 </head>
 
 <body>
   <div id="uploadContainer">
 
+    <p>点击或拖曳文件</p>
+    <span id="uploadBtn" type="submit">提交</span>
   </div>
-  <button id="uploadBtn" type="submit"></button>
-
 
   <script src="../vendors/moxie/moxie.min.js"></script>
   <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
@@ -23,7 +31,7 @@
     var uploader = Qiniu.uploader({
       runtimes: 'html5,flash,html4', //上传模式,依次退化
       browse_button: 'uploadBtn', //上传选择的点选按钮，**必需**
-      uptoken_url: '/token', //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+      uptoken_url: 'http://localhost:8888/uptoken', //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
       // uptoken : '', //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
       // unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
       // save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
