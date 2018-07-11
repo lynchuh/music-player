@@ -7,21 +7,44 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/default.css">
   <title>Document</title>
-  <style>
-    #uploadContainer{
-      height: 200px;
-      width: 200px;
-      border: 1px solid red;
-    }
-  </style>
+
 </head>
 
 <body>
-  <div id="uploadContainer">
-
-    <p>点击或拖曳文件</p>
-    <span id="uploadBtn" type="submit">提交</span>
+  <div class="page">
+    <aside>
+      <h1>新建歌单</h1>
+      <div class="upload" id="uploadContainer">
+        <p>点击或拖曳文件</p>
+        <span id="uploadBtn" type="submit">提交</span>
+      </div>
+    </aside>
+    <main>
+      <h1>新建歌曲</h1>
+      <form action="">
+        <div class="row">
+          <label for="">歌名
+            <input type="text">
+          </label>
+        </div>
+        <div class="row">
+          <label for="">歌手
+            <input type="text">
+          </label>
+        </div>
+        <div class="row">
+          <label for="">外链
+            <input type="text">
+          </label>
+        </div>
+        <div class="row">
+          <button type="submit">保存</button>
+        </div>
+      </form>
+    </main>
   </div>
+
+
 
   <script src="../vendors/moxie/moxie.min.js"></script>
   <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
