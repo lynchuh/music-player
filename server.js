@@ -34,11 +34,13 @@ var server = http.createServer(function (request, response) {
       secretKey
     } = config
     let mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
+    // console.log(mac)
     let options = {
       scope: 'music-player',
+      returnBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}'
     };
     var putPolicy = new qiniu.rs.PutPolicy(options);
-    var uploadToken = putPolicy.uploadToken(mac);
+    var uploadToken=putPolicy.uploadToken(mac);
     response.write(`
     {
       "uptoken":"${uploadToken}"

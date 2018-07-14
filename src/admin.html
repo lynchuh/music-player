@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/default.css">
-  <title>Document</title>
+  <title>管理页面</title>
 
 </head>
 
 <body>
-  <div class="page">
+  <div class="page" id="app">
     <aside>
-      <div class="songlistArea">
+      <div class="songlistArea" id="songList">
         <h1>新建歌单</h1>
         <ul class="songList">
 
@@ -21,11 +21,11 @@
       </div>
     </aside>
     <main>
-        <div class="uploadArea" id="uploadContainer">
+        <div class="uploadArea" id="uploadSong">
             <p>点击或拖曳文件</p>
             <span id="uploadBtn" type="submit">提交</span>
           </div>
-      <div class="songformArea">
+      <div class="songformArea" id="songform">
         <h1>新建歌曲</h1>
         <form action="">
           <div class="row">
