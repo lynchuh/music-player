@@ -54,7 +54,7 @@
                var sourceLink = domain + encodeURIComponent(response.key); 
                window.eventHub.emit('upload',{
                  response:response,
-                 key:response.key,
+                 name:response.key,
                  url:sourceLink
                })
         },

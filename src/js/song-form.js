@@ -6,7 +6,7 @@
     <form action="">
       <div class="row">
         <label for="">歌名
-          <input type="text" value="__song">
+          <input type="text" value="__name__">
         </label>
       </div>
       <div class="row">
@@ -47,7 +47,7 @@
       this.model=model
       this.view.render(this.model.data)
       window.eventHub.on('upload',(data)=>{
-        console.log(data)
+        this.view.render(data)
       })
     }
   }

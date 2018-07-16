@@ -36,6 +36,12 @@ aside .songList li{
   margin: 0 8px;
   padding: 5px 0;
 }
+aside h1.active{
+  background-color: #dddddd;
+}
+aside .songList li.active{
+  background-color: #dddddd;
+}
 main{
   display: flex;
   flex-direction: column;
