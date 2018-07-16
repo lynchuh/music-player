@@ -21,32 +21,12 @@
       </div>
     </aside>
     <main>
-        <div class="uploadArea" id="uploadSong">
-            <p>点击或拖曳文件</p>
-            <span id="uploadBtn" type="submit">提交</span>
-          </div>
-      <div class="songformArea" id="songform">
-        <h1>新建歌曲</h1>
-        <form action="">
-          <div class="row">
-            <label for="">歌名
-              <input type="text">
-            </label>
-          </div>
-          <div class="row">
-            <label for="">歌手
-              <input type="text">
-            </label>
-          </div>
-          <div class="row">
-            <label for="">外链
-              <input type="text">
-            </label>
-          </div>
-          <div class="row">
-            <button type="submit">保存</button>
-          </div>
-        </form>
+      <div class="uploadArea" id="uploadSong">
+        <p>点击或拖曳文件</p>
+        <button id="uploadBtn" type="submit">提交</button>
+      </div>
+      <div class="songformArea" id="songForm">
+
       </div>
 
     </main>
@@ -58,7 +38,9 @@
   <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
   <script src="../node_modules/plupload/js/plupload.min.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./js/eventHub.js"></script>
   <script src="./js/upload-song.js"></script>
+  <script src="./js/song-form.js"></script>
 </body>
 
 </html>
