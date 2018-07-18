@@ -2,7 +2,7 @@
   let view = {
     el: '#songForm',
     template: `
-    <h1>新建歌曲</h1>
+    
     <form action="">
       <div class="row">
         <label for="">歌名
@@ -32,6 +32,11 @@
         html = html.replace(`__${string}__`, data[string] || '')
       })
       $(this.el).html(html)
+      if(data.id){
+        $(this.el).prepend('<h1>编辑歌曲</h1>')
+      }else{
+        $(this.el).prepend('<h1>新建歌曲</h1>')
+      }
     },
     reset() {
       this.render({})
@@ -74,7 +79,11 @@
         this.model.data=data
         this.view.render(this.model.data)
       })
-      window.eventHub.on('revise',(data)=>{
+      window.eventHub.on('selectLi',(data)=>{
+        this.model.data=data
+        this.view.render(this.model.data)
+      })
+      window.eventHub.on('selectCreate',(data)=>{
         this.model.data=data
         this.view.render(this.model.data)
       })

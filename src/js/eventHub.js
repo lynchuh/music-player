@@ -19,8 +19,10 @@ window.eventHub = {
       this.events[eventName] = []
     }
     this.events[eventName].push(fn)
+    
   },
   test:function(){
     console.log('我进入订阅发布中心啦')
+    console.log(this.events)
   }
 }
