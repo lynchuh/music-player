@@ -1,12 +1,11 @@
 {
   let view = {
     el: '#songList',
-    template: `<h1>新建歌单</h1>
+    template: `<h1 class="active">新建歌单</h1>
       <ul class="songList">
       </ul>
     `,
     init(data){
-      this.activeItem('h1')
       this.render(data)
     },
     render(data) {
@@ -55,6 +54,14 @@
       window.eventHub.on('create', (data) => {
         this.model.data.songs.push(data)
         this.view.render(this.model.data)
+      })
+      window.eventHub.on('update',(data)=>{
+        let modelSong = this.model.data.songs
+        for(let i=0;i<modelSong.length;i++){
+          if(modelSong[i].id===data.id){
+            Object.assign(modelSong[i],data)
+          }
+        }
       })
       this.getAllsongs()
       this.bindEvent()
