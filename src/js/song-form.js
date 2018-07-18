@@ -57,6 +57,8 @@
           attributes
         } = newSong
         this.data={id,...attributes}//ES6新语法
+        //错误用法 这样data的内存地址一直没变，变的是内容。
+        // Object.assign(this.data,{id,...attributes})
       }, (error) => {
         console.error(error.message);
       });
@@ -69,7 +71,8 @@
       this.view.render(this.model.data)
       this.bindEvent()
       window.eventHub.on('upload', (data) => {
-        this.view.render(data)
+        this.model.data=data
+        this.view.render(this.model.data)
       })
     },
     bindEvent() {
