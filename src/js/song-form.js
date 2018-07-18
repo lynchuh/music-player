@@ -57,7 +57,6 @@
           attributes
         } = newSong
         this.data={id,...attributes}//ES6新语法
-        console.log(this.data)
       }, (error) => {
         console.error(error.message);
       });

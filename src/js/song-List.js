@@ -8,11 +8,9 @@
     render(data){
       let $el=$(this.el)
       $el.html(this.template)
-      console.log(data)
-      let songs=data.songs
+      let songs= data.songs
       let liList=songs.map((song)=>$('<li></li>').text(song.name))
-      console.log(liList)
-      $el.find('ul').empty()
+      $el.find('ul.songList').empty()
       liList.map((domLi)=>{
         $el.find('ul').append(domLi)
       })
@@ -42,7 +40,7 @@
       })
       window.eventHub.on('creat',(data)=>{
         this.model.data.songs.push(data)
-        this.view.render(this.model)
+        this.view.render(this.model.data)
       })
     },
     
