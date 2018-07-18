@@ -87,7 +87,7 @@
         this.model.create(data)
           .then(() => {
             this.view.reset()
-            window.eventHub.emit('creat', this.model.data)
+            window.eventHub.emit('create', this.model.data)
           })
       })
     }
