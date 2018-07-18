@@ -6,17 +6,17 @@
     <form action="">
       <div class="row">
         <label for="">歌名
-          <input type="text" value="__name__">
+          <input name="name" type="text" value="__name__">
         </label>
       </div>
       <div class="row">
         <label for="">歌手
-          <input type="text" value="__singer__">
+          <input name="singer" type="text" value="__singer__">
         </label>
       </div>
       <div class="row">
         <label for="">外链
-          <input type="text" value="__url__">
+          <input name="url" type="text" value="__url__">
         </label>
       </div>
       <div class="row">
@@ -39,15 +39,46 @@
     //务必搞懂↑
   }
   let model={
-    data:{},
+    data:{
+      name:'',singer:'',url:'',id:''
+    },
+    create(data){//将form上的信息保存到leancloud，会生成一个id
+      console.log('我運行了')
+      var Song = AV.Object.extend('Song');
+      var songs = new Song();
+      songs.set('name', data.name);
+      songs.set('singer', data.singer);
+      songs.set('url', data.url);
+      songs.save().then((newSong)=>{
+        let {id,attributes}=newSong
+        Object.assign(this.data,{id,...attributes})//ES6新语法
+        console.log(this.data)
+      }, (error)=>{
+        // 异常处理
+        console.error(error.message);
+      });
+    }
   }
   let controller={
     init(view,model){
       this.view=view
       this.model=model
       this.view.render(this.model.data)
+      this.bindEvent()
       window.eventHub.on('upload',(data)=>{
         this.view.render(data)
+      })
+    },
+    bindEvent(){
+      $(this.view.el).on('submit','form',(e)=>{
+        e.preventDefault()
+        let need='name singer url'.split(' ')
+        let data=[]
+        need.map((string)=>{
+          data[string]=
+            $(this.view.el).find(`input[name="${string}"]`).val()
+        })
+        this.model.create(data)
       })
     }
   }
