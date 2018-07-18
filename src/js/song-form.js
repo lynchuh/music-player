@@ -89,7 +89,6 @@
             this.view.reset()
             window.eventHub.emit('creat', this.model.data)
           })
-
       })
     }
   }

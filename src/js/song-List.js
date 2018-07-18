@@ -14,6 +14,7 @@
       liList.map((domLi) => {
         $el.find('ul').append(domLi)
       })
+      r
     },
     reset() {
       this.render(this.model.data)
@@ -23,7 +24,6 @@
       $el.find('.active').removeClass('active')
       $el.find(selector).addClass('active')
     }
-
   }
   let model = {
     data: {
@@ -37,7 +37,6 @@
         })
         return songs
       })
-      
     }
   }
   let controller = {
@@ -53,12 +52,13 @@
         this.model.data.songs.push(data)
         this.view.render(this.model.data)
       })
-      this.model.find().then((x)=>{
+      this.getAllsongs()
+    },
+    getAllsongs(){
+      this.model.find().then(()=>{
         this.view.render(this.model.data)
       })
     },
-
-
   }
   controller.init(view, model)
 }
