@@ -75,9 +75,7 @@
         window.eventHub.emit('selectLi',data)
       })
       $(this.view.el).on('click','h1',(e)=>{
-        let $create=$(e.currentTarget)
-        window.eventHub.emit('selectCreate',{id:'',name:'',singer:'',url:''})
-        this.view.activeItem($create)
+        window.eventHub.emit('upload')
       })
     }
   }

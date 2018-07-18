@@ -76,14 +76,20 @@
       this.view.render(this.model.data)
       this.bindEvent()
       window.eventHub.on('upload', (data) => {
-        this.model.data=data
+        if(this.model.data.id){
+          this.model.data={id:'',name:'',singer:'',url:''}
+        }else{
+          Object.assign(this.model.data,data)
+        }
         this.view.render(this.model.data)
       })
       window.eventHub.on('selectLi',(data)=>{
+        console.log(data.id)
         this.model.data=data
         this.view.render(this.model.data)
       })
       window.eventHub.on('selectCreate',(data)=>{
+        console.log(data)
         this.model.data=data
         this.view.render(this.model.data)
       })
