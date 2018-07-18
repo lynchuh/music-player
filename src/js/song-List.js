@@ -5,6 +5,10 @@
       <ul class="songList">
       </ul>
     `,
+    init(data){
+      this.activeItem('h1')
+      this.render(data)
+    },
     render(data) {
       let $el = $(this.el)
       $el.html(this.template)
@@ -44,7 +48,7 @@
       this.view = view
       this.model = model
       this.model.find()
-      this.view.render(this.model.data)
+      this.view.init(this.model.data)
       window.eventHub.on('upload', (data) => {
         this.view.activeItem('h1')
       })

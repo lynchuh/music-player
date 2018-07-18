@@ -32,9 +32,9 @@
         html = html.replace(`__${string}__`, data[string] || '')
       })
       $(this.el).html(html)
-      if(data.id){
+      if (data.id) {
         $(this.el).prepend('<h1>编辑歌曲</h1>')
-      }else{
+      } else {
         $(this.el).prepend('<h1>新建歌曲</h1>')
       }
     },
@@ -61,12 +61,26 @@
           id,
           attributes
         } = newSong
-        this.data={id,...attributes}//ES6新语法
+        this.data = {
+          id,
+          ...attributes
+        } //ES6新语法
         //错误用法 这样data的内存地址一直没变，变的是内容。
         // Object.assign(this.data,{id,...attributes})
       }, (error) => {
         console.error(error.message);
       });
+    },
+    update(data) { //将form上的信息更新到leancloud，id不变
+      var song = AV.Object.createWithoutData('Song', this.data.id);
+      song.set('name', data.name)
+      song.set('singer', data.singer)
+      song.set('url', data.url)
+      return song.save()
+        .then(() => {
+          Object.assign(this.data, data)
+        })
+
     }
   }
   let controller = {
@@ -76,21 +90,25 @@
       this.view.render(this.model.data)
       this.bindEvent()
       window.eventHub.on('upload', (data) => {
-        if(this.model.data.id){
-          this.model.data={id:'',name:'',singer:'',url:''}
-        }else{
-          Object.assign(this.model.data,data)
+        if (this.model.data.id) {
+          this.model.data = {
+            id: '',
+            name: '',
+            singer: '',
+            url: ''
+          }
+        } else {
+          Object.assign(this.model.data, data)
         }
         this.view.render(this.model.data)
       })
-      window.eventHub.on('selectLi',(data)=>{
-        console.log(data.id)
-        this.model.data=data
+      window.eventHub.on('selectLi', (data) => {
+        this.model.data = data
         this.view.render(this.model.data)
       })
-      window.eventHub.on('selectCreate',(data)=>{
+      window.eventHub.on('selectCreate', (data) => {
         console.log(data)
-        this.model.data=data
+        this.model.data = data
         this.view.render(this.model.data)
       })
     },
@@ -103,11 +121,19 @@
           data[string] =
             $(this.view.el).find(`input[name="${string}"]`).val()
         })
-        this.model.create(data)
-          .then(() => {
-            this.view.reset()
-            window.eventHub.emit('create', this.model.data)
+        if (this.model.data.id) { //id存在，即是要更新信息
+          this.model.update(data).then(() => {
+            //更新数据到数据库之后要做的事
+
+            
           })
+        } else {//id 不存在，即是要增加信息
+          this.model.create(data)
+            .then(() => {
+              this.view.reset()
+              window.eventHub.emit('create', this.model.data)
+            })
+        }
       })
     }
   }
