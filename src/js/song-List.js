@@ -64,9 +64,15 @@
       $(this.view.el).on('click','li',(e)=>{
         let $li=$(e.currentTarget)
         this.view.activeItem($li)
-        console.log($li)
         let songId=$li[0].getAttribute('data-song-id')
-        console.log(songId)
+        let data
+        let songs=this.model.data.songs
+        for(let i=0;i<songs.length;i++){
+          if(songs[i].id===songId){
+            data=JSON.parse(JSON.stringify(songs[i]))
+          }
+        }
+        window.eventHub.emit('revise',data)
       })
       $(this.view.el).on('click','h1',(e)=>{
         let $create=$(e.currentTarget)
