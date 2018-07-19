@@ -20,7 +20,7 @@
       this.initQiniu()
     },
     initQiniu() {
-      var uploader = Qiniu.uploader({
+      let uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',
         browse_button: this.view.findItem('#uploadBtn'),
         uptoken_url: 'http://localhost:8888/uptoken',
@@ -35,31 +35,31 @@
         chunk_size: '4mb',
         auto_start: true,
         init: {
-          'FilesAdded': function (up, files) {
-            plupload.each(files, function (file) {
+          'FilesAdded':(up, files)=>{
+            plupload.each(files,(file)=>{
               // 文件添加进队列后,处理相关的事情
             });
           },
-          'BeforeUpload': function (up, file) {
+          'BeforeUpload':(up, file)=>{
             // 每个文件上传前,处理相关的事情
           },
-          'UploadProgress': function (up, file) {
+          'UploadProgress':(up, file)=>{
             window.eventHub.emit('uploading')
           },
-          'FileUploaded': function (up, file, info) {
-            var domain = up.getOption('domain');
-            var response = JSON.parse(info.response);
-            var sourceLink = domain + encodeURIComponent(response.key);
+          'FileUploaded':(up, file, info)=>{
+            let domain = up.getOption('domain');
+            let response = JSON.parse(info.response);
+            let sourceLink = domain + encodeURIComponent(response.key);
             window.eventHub.emit('uploaded', {
               response: response,
               name: response.key,
               url: sourceLink
             })
           },
-          'Error': function (up, err, errTip) {
+          'Error':(up, err, errTip)=>{
             //上传出错时,处理相关的事情
           },
-          'UploadComplete': function () {
+          'UploadComplete':()=>{
             //队列文件处理完毕后,处理相关的事情
           },
 
