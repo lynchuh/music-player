@@ -1,29 +1,30 @@
 {
-  let view={
-    el:'#tabs',
-    init(){
-      this.$el=$(this.el)
+  let view = {
+    el: '#tabs',
+    init() {
+      this.$el = $(this.el)
     },
-    activeItem($selector){
+    activeItem($selector) {
       $selector.siblings('.active').removeClass('active').end()
         .addClass('active')
     }
-
   }
-  let model={}
-  let controller={
-    init(view,model){
-      this.view=view
-      this.model=model
+  let model = {}
+  let controller = {
+    init(view, model) {
+      this.view = view
+      this.model = model
       this.view.init()
       this.bindEvent()
     },
-    bindEvent(){
-      this.view.$el.on('click','.tabs-nav>li',(e)=>{
-        let $li= $(e.currentTarget)
+    bindEvent() {
+      this.view.$el.on('click', '.tabs-nav>li', (e) => {
+        let $li = $(e.currentTarget)
         this.view.activeItem($li)
+        let tabName= $li.attr('data-tab-name')
+        window.eventHub.emit('selectTab',tabName)
       })
     }
   }
-  controller.init(view,model)
+  controller.init(view, model)
 }
