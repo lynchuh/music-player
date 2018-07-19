@@ -26,4 +26,3 @@ window.eventHub = {
     console.log(this.events)
   }
 }
-window.eventHub.test()
