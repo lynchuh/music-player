@@ -44,13 +44,13 @@
             // 每个文件上传前,处理相关的事情
           },
           'UploadProgress': function (up, file) {
-            // 每个文件上传时,处理相关的事情
+            window.eventHub.emit('uploading')
           },
           'FileUploaded': function (up, file, info) {
             var domain = up.getOption('domain');
             var response = JSON.parse(info.response);
             var sourceLink = domain + encodeURIComponent(response.key);
-            window.eventHub.emit('upload', {
+            window.eventHub.emit('uploaded', {
               response: response,
               name: response.key,
               url: sourceLink

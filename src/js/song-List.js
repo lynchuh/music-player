@@ -47,7 +47,7 @@
       this.model = model
       this.model.find()
       this.view.init(this.model.data)
-      window.eventHub.on('upload', (data) => {
+      window.eventHub.on('uploaded', (data) => {
         this.view.activeItem('h1')
       })
       window.eventHub.on('create', (data) => {
@@ -91,7 +91,7 @@
         window.eventHub.emit('selectLi',data)
       })
       $(this.view.el).on('click','h1',(e)=>{
-        window.eventHub.emit('upload')
+        window.eventHub.emit('uploaded')
       })
     }
   }

@@ -89,7 +89,7 @@
       this.model = model
       this.view.render(this.model.data)
       this.bindEvent()
-      window.eventHub.on('upload', (data) => {
+      window.eventHub.on('uploaded', (data) => {
         if (this.model.data.id) {
           this.model.data = {
             id: '',
