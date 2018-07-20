@@ -17,7 +17,6 @@
       this.view=view
       this.model=model
       this.view.init()
-      console.log(this.view.$el)
       this.bindEvent()
       this.bindEventHub()
     },
@@ -25,7 +24,6 @@
     bindEventHub(){
       window.eventHub.on('selectTab',(tabName)=>{
         if(tabName==='page-2'){
-          console.log('我是第二页')
           this.view.show()
         }else{
           this.view.hide()

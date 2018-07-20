@@ -1,7 +1,7 @@
 console.log('我是module1')
 {
   let view={
-    el:'',
+    el:'section.playlists',
     init(){
       this.$el=$(this.el)
     }
