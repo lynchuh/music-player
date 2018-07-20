@@ -26,8 +26,7 @@
           .replace('{{song.name}}',song.name)
           .replace('{{song.singer}}',song.singer)
           .replace('{{song.id}}',song.id)
-        this.$el.append(li)
-        console.log(li)
+        this.$el.find('ol.list').append(li)
       })
     }
   }
