@@ -17,20 +17,26 @@
       this.view=view
       this.model=model
       this.view.init()
-      console.log(this.view.$el)
-      this.bindEvent()
       this.bindEventHub()
+      this.loadModule('./js/home/page-1-1.js')
+      this.loadModule('./js/home/page-1-2.js')
     },
-    bindEvent(){},
     bindEventHub(){
       window.eventHub.on('selectTab',(tabName)=>{
         if(tabName==='page-1'){
-          console.log('我要运行')
           this.view.show()
         }else{
           this.view.hide()
         }
       })
+    },
+    loadModule(src){
+      let script=document.createElement('script')
+      script.src=src
+      script.onload=()=>{
+        console.log('Module加载完毕')
+      }
+      document.body.appendChild(script)
     }
   }
   controller.init(view,model)
