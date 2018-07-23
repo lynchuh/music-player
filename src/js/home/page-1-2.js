@@ -55,11 +55,9 @@
       this.model.fetch().then(() => {
         this.view.render(this.model.data)
       })
-
     },
     bindEvent() {}
   }
   controller.init(view, model)
   console.log('我是module2')
-
 }

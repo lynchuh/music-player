@@ -1,5 +1,28 @@
 {
-  let view={}
+  let view={
+    el:'#app',
+    template:`
+      <audio src={{url}}></audio>
+    `,
+    render(){
+      
+    },
+    find(selector){
+      return $(this.el).find(selector)[0]
+    },
+    uploadMusic(data){
+      let audio=this.find('audio')
+      audio.src=data.url
+    },
+    play(){
+      let audio=this.find('audio')
+      audio.play()
+    },
+    pause(){
+      let audio=this.find('audio')
+      audio.pause()
+    }
+  }
   let model={
     data:{
       id:'',
@@ -7,14 +30,11 @@
       singer:'',
       url:''
     },
-    setId(id){
-      this.data.id=id
-    },
-    get(){
-      console.log('运行？')
+    fetch(){
       var query = new AV.Query('Song')
       return query.get(this.data.id).then((song) => {
-        return {id:song.id,...song.attributes}
+        Object.assign(this.data,song.attributes)
+        return song
       })
     },
   }
@@ -22,14 +42,22 @@
     init(view,model){
       this.view=view
       this.model=model
-      let id=this.getSongId()
-      console.log(id)
-      this.model.setId(id)
-      console.log(this.model.data.id)
-      this.model.get().then((data)=>{
-        console.log(data)
+      this.getSongId()
+      this.model.fetch().then((data)=>{
+        this.view.uploadMusic(this.model.data)
       })
+      this.bindEvent()
+    },
+    bindEvent(){
+      let playBtn=this.view.find('.play')
+      let pauseBtn=this.view.find('.pause')
+      $(playBtn).on('click',(e)=>{
+        this.view.play()
+      })
+      $(pauseBtn).on('click',(e)=>{
+        this.view.pause()
 
+      })
     },
     getSongId(){
       let search = window.location.search
@@ -47,12 +75,11 @@
           break
         }
       }
-      return id
-    }
+      this.model.data.id=id 
+    },
+    
+
 
   }
   controller.init(view,model)
-
-
-  
 }
