@@ -1,6 +1,6 @@
 {
   let view = {
-    el: '#songList',
+    el: '#songListContainer',
     template: `<h1 class="active">新建歌单</h1>
       <ul class="songList">
       </ul>

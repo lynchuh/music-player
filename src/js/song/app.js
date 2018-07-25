@@ -34,7 +34,6 @@
         url: ''
       },
       status: false,
-
     },
     fetch() {
       var query = new AV.Query('Song')
@@ -61,8 +60,6 @@
         console.log(this.model.data)
         this.view.toggleStatus(this.model.data.status)
       })
-      
-
     },
     getSongId() {
       let search = window.location.search
@@ -85,3 +82,4 @@
   }
   controller.init(view, model)
 }
+
