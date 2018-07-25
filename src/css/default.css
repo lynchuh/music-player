@@ -6,7 +6,8 @@
 * {
   box-sizing: border-box;
 }
-*{
+
+* {
   font-family: Helvetica, "Hiragino Sans GB", "Microsoft Yahei", 微软雅黑, Arial, sans-serif;
   font-size: 12px;
   color: blanchedalmond;
@@ -30,6 +31,22 @@ a {
   color: inherit
 }
 
+button,
+input {
+  outline: none;
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 4px;
+}
+
+button {
+  cursor: pointer;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px blanchedalmond inset;
+}
+
 .clearfix::after {
   content: '';
   display: block;
@@ -40,34 +57,42 @@ a {
   zoom: 1;
 }
 
+::-webkit-scrollbar-thumb:horizontal {
+  /*水平滚动条的样式*/
+  width: 4px;
+  background-color: #CCCCCC;
+  -webkit-border-radius: 6px;
+}
 
-::-webkit-scrollbar-thumb:horizontal { /*水平滚动条的样式*/
-	width: 4px;
-	background-color: #CCCCCC;
-	-webkit-border-radius: 6px;
-}
 ::-webkit-scrollbar-track-piece {
-	background-color: rgba(87, 85, 85, 0.459); /*滚动条的背景颜色*/
-	-webkit-border-radius: 0; /*滚动条的圆角宽度*/
+  background-color: rgba(87, 85, 85, 0.459);
+  /*滚动条的背景颜色*/
+  -webkit-border-radius: 0;
+  /*滚动条的圆角宽度*/
 }
+
 ::-webkit-scrollbar {
-	width: 6px; /*滚动条的宽度*/
-	height: 8px; /*滚动条的高度*/
+  width: 6px;
+  /*滚动条的宽度*/
+  height: 8px;
+  /*滚动条的高度*/
 }
-::-webkit-scrollbar-thumb:vertical { /*垂直滚动条的样式*/
-	height: 50px;
-	background-color: #999;
-	-webkit-border-radius: 4px;
-	outline: 1px solid rgba(70, 69, 69, 0.8);
-	outline-offset: -2px;
+
+::-webkit-scrollbar-thumb:vertical {
+  /*垂直滚动条的样式*/
+  height: 50px;
+  background-color: #999;
+  -webkit-border-radius: 4px;
+  outline: 1px solid rgba(70, 69, 69, 0.8);
+  outline-offset: -2px;
 }
-::-webkit-scrollbar-thumb:hover { /*滚动条的hover样式*/
-	height: 50px;
-	background-color: #9f9f9f;
+
+::-webkit-scrollbar-thumb:hover {
+  /*滚动条的hover样式*/
+  height: 50px;
+  background-color: #9f9f9f;
   -webkit-border-radius: 4px;
 }
-
-
 
 .page {
   display: flex;
@@ -77,14 +102,16 @@ a {
   background: url(../img/admin-background.jpg) no-repeat center;
   background-size: cover;
 }
-.page::after{
+
+.page::after {
   content: '';
   width: 100%;
   height: 100%;
   position: absolute;
   background-color: rgba(87, 85, 85, 0.459)
 }
-.page>*{
+
+.page>* {
   z-index: 1;
 }
 
@@ -93,7 +120,7 @@ aside {
   flex-direction: column;
   width: 25%;
   background-color: rgba(87, 85, 85, 0.459);
-  box-shadow:8px 0 40px 0 rgba(0,0,0,.3)
+  box-shadow: 8px 0 40px 0 rgba(0, 0, 0, .3)
 }
 
 aside h1 {
@@ -117,18 +144,21 @@ aside h1::after {
   background-color: rgba(70, 69, 69, 0.8);
   transform: scaleY(0.5)
 }
-aside .songlistArea{
+
+aside .songlistArea {
   overflow: auto;
 }
+
 aside .songList li {
   /* border-bottom: 1px  ; */
   height: 30px;
   line-height: 30px;
   /* margin: 0 8px; */
-  padding-left:10px;
+  padding-left: 10px;
   transition: all 0.3s;
   position: relative;
 }
+
 aside .songList li::after {
   content: '';
   display: block;
@@ -138,18 +168,17 @@ aside .songList li::after {
   bottom: 0;
   left: 5%;
 }
+
 aside h1.active {
   background-color: rgba(87, 85, 85, 0.459);
   /* box-shadow:0 2px 40px 0 rgba(233, 129, 129, 0.2); */
-  box-shadow: 0px 0px 40px rgba(233,128,130,0.2);
-
+  box-shadow: 0px 0px 40px rgba(233, 128, 130, 0.2);
 }
 
 aside .songList li.active {
-  background-color:rgba(87, 85, 85, 0.459);
+  background-color: rgba(87, 85, 85, 0.459);
   /* box-shadow:0 4px 10px -2px rgba(233, 129, 129, 0.2); */
-  box-shadow: inset 0px 0px 79px -26px rgba(233,128,130,0.4);
-
+  box-shadow: inset 0px 0px 79px -26px rgba(233, 128, 130, 0.4);
 }
 
 main {
@@ -160,26 +189,90 @@ main {
 }
 
 main .uploadArea {
-  border: 1px dashed#4d4d4d;
+  box-shadow: 8px 0 40px 0 rgba(0, 0, 0, .3);
   border-radius: 6px;
-  height: 100px;
-  width: 98%;
+  max-height: 350px;
+  width: 80%;
+  padding: 2vw 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  align-self: center;
+  flex-grow: 1;
+  margin: 20px 0;
+}
+
+main .uploadArea #uploadSong,
+main .uploadArea #uploadCover {
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  width: 80%;
+  flex-grow: 1;
+  padding: 1vw;
+  margin: 1vw;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  align-self: center;
-  flex-grow: 1;
-  margin-bottom: 20px;
 }
 
-main .uploadArea span {
-  font-size: 12px;
+main .uploadArea #uploadSong p,
+main .uploadArea #uploadCover p {
+  flex: 0;
+  text-align: center
+}
+
+main .uploadArea #uploadSong button,
+main .uploadArea #uploadCover button {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 4px;
+  width: 20%;
+  margin-top: 1.5vw
 }
 
 main .songformArea {
-  flex-grow: 3
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main .songformArea h1 {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  /* margin-bottom: 18px; */
+}
+main .songformArea form{
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  padding-top: 28px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content:flex-start;
+  box-shadow:8px 0 40px 0 rgba(0, 0, 0, .3)
+}
+main .songformArea form .row {
+  margin: 16px 0;
+  width: 45%;
+  display: flex;
+  justify-content: center;
+}
+
+main .songformArea form .row:last-child {
+  margin-top: 24px;
+  flex-grow: 1;
+  /* background-color: red; */
+}
+
+main .songformArea form .row button {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .site-loading {
@@ -192,7 +285,8 @@ main .songformArea {
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
-.site-loading.active{
+
+.site-loading.active {
   visibility: visible;
 }
 

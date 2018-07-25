@@ -5,20 +5,25 @@
     
     <form action="">
       <div class="row">
-        <label for="">歌名
+        <label for=""> <span>歌名：</span>
           <input name="name" type="text" value="__name__">
         </label>
       </div>
       <div class="row">
-        <label for="">歌手
+        <label for=""><span>歌手：</span>
           <input name="singer" type="text" value="__singer__">
         </label>
       </div>
       <div class="row">
-        <label for="">外链
+        <label for=""><span>外链：</span>
           <input name="url" type="text" value="__url__">
         </label>
       </div>
+      <div class="row">
+      <label for=""><span>封面：</span>
+        <input name="cover" type="text" value="__cover__">
+      </label>
+    </div>
       <div class="row">
         <button type="submit">保存</button>
       </div>
@@ -26,7 +31,7 @@
     `,
     // 务必搞懂↓
     render(data = {}) { //data={} 给参数一个默认值，默认值为{}
-      let placeholders = ['name', 'url', 'singer']
+      let placeholders = ['name', 'url', 'singer','cover']
       let html = this.template
       placeholders.map((string) => {
         html = html.replace(`__${string}__`, data[string] || '')
@@ -48,6 +53,7 @@
       name: '',
       singer: '',
       url: '',
+      cover:'',
       id: ''
     },
     create(data) { //将form上的信息保存到leancloud，会生成一个id
@@ -56,6 +62,7 @@
       songs.set('name', data.name);
       songs.set('singer', data.singer);
       songs.set('url', data.url);
+      songs.set('cover', data.cover);
       return songs.save().then((newSong) => {
         let {
           id,
@@ -76,6 +83,7 @@
       song.set('name', data.name)
       song.set('singer', data.singer)
       song.set('url', data.url)
+      song.set('cover', data.cover)
       return song.save()
         .then(() => {
           Object.assign(this.data, data)
@@ -95,11 +103,16 @@
             id: '',
             name: '',
             singer: '',
-            url: ''
+            url: '',
+            cover:''
           }
         } else {
           Object.assign(this.model.data, data)
         }
+        this.view.render(this.model.data)
+      })
+      window.eventHub.on('uploadCover',(data)=>{
+        Object.assign(this.model.data,data)
         this.view.render(this.model.data)
       })
       window.eventHub.on('selectLi', (data) => {
@@ -115,7 +128,7 @@
     bindEvent() {
       $(this.view.el).on('submit', 'form', (e) => {
         e.preventDefault()
-        let need = 'name singer url'.split(' ') //得到一个数组
+        let need = 'name singer url cover'.split(' ') //得到一个数组
         let data = []
         need.map((string) => {
           data[string] =

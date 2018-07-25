@@ -20,6 +20,9 @@
       window.eventHub.on('uploaded',()=>{
         this.view.hide()
       })
+      window.eventHub.on('uploadCover',()=>{
+        this.view.hide()
+      })
     }
   }
   controller.init(view)
