@@ -3,7 +3,6 @@ window.eventHub = {
 
   }, // hash
   emit(eventName, data){ //发布
-    //将事件（函数？？）放入桶内
     for(let key in this.events){
       if(key === eventName){
         let fnList = this.events[key]
@@ -14,7 +13,6 @@ window.eventHub = {
     }
   },
   on:function(eventName, fn){ //订阅 
-    
     if(this.events[eventName] === undefined){
       this.events[eventName] = []
     }

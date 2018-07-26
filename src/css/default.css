@@ -119,6 +119,7 @@ aside {
   display: flex;
   flex-direction: column;
   width: 25%;
+  min-width: 100px;
   background-color: rgba(87, 85, 85, 0.459);
   box-shadow: 8px 0 40px 0 rgba(0, 0, 0, .3)
 }
@@ -227,9 +228,11 @@ main .uploadArea #uploadSong button,
 main .uploadArea #uploadCover button {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  padding: 4px;
+  padding: 8px;
   width: 20%;
-  margin-top: 1.5vw
+  min-height: 30px;
+  margin-top: 1.5vw;
+  min-width:42px;
 }
 
 main .songformArea {
@@ -254,6 +257,7 @@ main .songformArea form{
   flex-direction: row;
   flex-wrap: wrap;
   align-content:flex-start;
+  justify-content: center;
   box-shadow:8px 0 40px 0 rgba(0, 0, 0, .3)
 }
 main .songformArea form .row {
@@ -268,7 +272,9 @@ main .songformArea form .row:last-child {
   flex-grow: 1;
   /* background-color: red; */
 }
-
+main .songformArea form .row input{
+  width: 80%;
+}
 main .songformArea form .row button {
   padding: 4px 8px;
   border-radius: 4px;
