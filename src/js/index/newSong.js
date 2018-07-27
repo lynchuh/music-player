@@ -1,7 +1,6 @@
 {
-  console.log('xixi')
   let view = {
-    el: 'section.songs',
+    el: 'section.newSongs',
     init() {
       this.$el = $(this.el)
     },
@@ -18,8 +17,8 @@
   </li>`,
     render(data) {
       let {songs}=data
-      console.log(data)
       songs.map((song)=>{
+        song.cover=song.cover?song.cover:'./img/song-list/list-1.jpg'
         let li= this.template
           .replace('{{song.cover}}',song.cover)
           .replace('{{song.name}}',song.name)
@@ -58,5 +57,4 @@
     bindEvent() {}
   }
   controller.init(view, model)
-  console.log('我是module2')
 }

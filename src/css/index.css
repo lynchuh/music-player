@@ -35,6 +35,7 @@ input {
   background: transparent;
   border: 1px solid #ddd;
   padding: 4px;
+  -webkit-appearance : none
 }
 
 button {
@@ -54,7 +55,7 @@ body{
 
 
 /**100vw=241px**/
-section.topbar{
+section.topBar{
   display: flex;
   flex-direction: row;
   height: 16vw;
@@ -62,9 +63,14 @@ section.topbar{
   align-items: center;
   background-color: rgba(0, 0, 0, 0.1);
   padding: 0 3vw;
+  border-radius: 6px;
+  margin: 2vw;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);
+  transition: all 0.5s;
+
 }
-section.topbar .logo,
-section.topbar .searchMusic{
+section.topBar .logo,
+section.topBar .searchMusic{
   height: 9vw;
   width: 9vw;
   border-radius: 50%;
@@ -73,26 +79,89 @@ section.topbar .searchMusic{
   justify-content: center;
   align-items: center;
 }
-section.topbar .logo{
+section.topBar .logo{
   margin-right: auto;
 }
-section.topbar .searchMusic{
+section.topBar .searchMusic{
   margin-left: auto;
 }
 
-section.topbar .logo img{
+section.topBar .logo img{
   height: 7vw;
   width: 7vw;
 }
-section.topbar .searchMusic img{
-  height: 5vw;
-  width: 5vw;
-}
-section.topbar .title h1{
+
+section.topBar .title h1{
   flex: 1;
   font-size: 18px;
   font-weight: 500;
 }
+section.topBar .searchMusic img{
+  height: 5vw;
+  width: 5vw;
+  display: none;
+}
+section.topBar .searchMusic img{/*默认*/
+  display:block;
+} 
+section.topBar .searchMusic .searchWrapper{/*默认*/
+  display: none;
+}
+
+
+
+section.topBar.active {
+  justify-content: flex-start;
+  transition: all 0.5s;
+}
+section.topBar.active .title{
+  display: none;
+}
+section.topBar.active .logo{
+  margin-right: 0;
+}
+section.topBar.active .searchMusic{
+  background-color: transparent;
+  margin-left: 0;
+  width: auto;
+  flex: 1;
+}
+section.topBar.active .searchMusic .icon{
+  display: none;
+}
+section.topBar.active .searchMusic .searchWrapper{
+display: flex;
+width: 100%;
+flex-direction: row;
+justify-content: space-between;
+margin-left: 4vw;
+}
+section.topBar.active .searchMusic .searchWrapper input{
+  height: 8vw;
+  line-height: 5vw;
+  width: 60vw;
+  border-radius: 6px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16);
+}
+section.topBar.active .searchMusic .searchWrapper input:focus,
+section.topBar.active .searchMusic .searchWrapper input:active{
+  border:1px solid rgb(165, 163, 163);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.08)
+}
+
+
+section.topBar.active .searchMusic .searchWrapper button{
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16);
+  border-radius: 6px;
+  padding:1vw 2.5vw; 
+}
+
+
+
+
+
+
+
 
 
 section.songListWrapper{
@@ -100,14 +169,19 @@ section.songListWrapper{
   flex-direction: column;
   padding: 0 1vw 3vw;
   background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);;
+  margin: 2vw;
+  border-radius: 6px;
 }
 
 section.songListWrapper h2{
   font-size: 16px;
   font-weight: 550;
-  height: 11vw;
-  line-height: 11vw;
+  height: 12.5vw;
+  line-height: 12.5vw;
+  position: relative;
 }
+
 
 section.songListWrapper ol {
   display: flex;
@@ -116,7 +190,7 @@ section.songListWrapper ol {
   padding: 0 1vw;
 }
 section.songListWrapper ol li {
-  width: 30vw;
+  width: 28vw;
   border-radius: 4px;
   background-color: #fff;
   color: darkslategrey;
@@ -130,26 +204,45 @@ section.songListWrapper ol li .title{
   padding:1vw 2vw;
 }
 
-section.songs{
-  box-shadow: 8px 0 40px 0 rgba(0, 0, 0, .3);
-  background-color: rgba(124, 124, 104, 0.1);
-  margin-top: 3vw; 
+section.newSongs{
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 2vw;
+  margin-top: 0;
+  border-radius: 6px;
 }
 
 
 
-section.songs h2.sectionTitle{
+
+
+
+
+section.newSongs h2.sectionTitle{
   font-size: 16px;
   font-weight: 550;
   height: 12.5vw;
   line-height: 12.5vw;
   margin: 1vw 2vw;
+  position: relative;
 }
-section.songs ol.list{
+section.newSongs h2::after{
+  content: '';
+  display: block;
+  width: 98%;
+  height: 1px;
+  background-color: #978d8d;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: scaleY(.2)
+}
+
+section.newSongs ol.list{
   display: flex;
   flex-direction: column;
 }
-section.songs ol.list li{
+section.newSongs ol.list li{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -161,10 +254,10 @@ section.songs ol.list li{
   background-size: cover;
   
 }
-section.songs ol.list li::after{
+section.newSongs ol.list li::after{
   content: '';
   display: block;
-  background-color: #ddd;
+  background-color: rgb(197, 184, 184);
   width: 100%;
   height: 1px;
   transform: scaleY(0.4);
@@ -172,23 +265,23 @@ section.songs ol.list li::after{
   bottom:0;
   left: 0; 
 }
-section.songs ol.list li img.cover{
+section.newSongs ol.list li img.cover{
   width: 14.5vw;
   height: 14.5vw;
 }
-section.songs ol.list li .descript{
+section.newSongs ol.list li .descript{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   margin-left: 6vw;
   font-size: 14px;
 }
-section.songs ol.list li .descript .singer{
+section.newSongs ol.list li .descript .singer{
   font-size: 12px;
   margin:2vw 1vw;
 
 }
-section.songs ol.list li .play img{
-  width: 6.8vw;
-  height: 6.8vw;
+section.newSongs ol.list li .play img{
+  width: 7vw;
+  height: 7vw;
 }

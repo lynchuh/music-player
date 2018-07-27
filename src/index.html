@@ -11,15 +11,17 @@
 <body>
   <div class="page tabs">
     <div class="sticky">
-      <section class="topbar">
-        <!--logo-->
+      <section class="topBar">
         <div class="logo">
           <img src="./img/LYN-LOGO.png">
         </div>
-        <div class=title><h1>我的云音乐</h1></div>
-        <div class="searchMusic">
-          <img src="./img/search.png">
-          
+        <div class="title " ><h1>我的云音乐</h1></div>
+        <div class="searchMusic ">
+          <img class="active icon" src="./img/search.png">
+          <form class="searchWrapper" id="myForm">
+            <input type="text" name="songValue">
+            <button class="submit" >搜索</button>
+          </form>
         </div>
       </section>
       <section id="songList" class="songListWrapper">
@@ -41,7 +43,7 @@
         </ol>
       </section>
     </div>
-    <section class="songs">
+    <section class="newSongs">
       <h2 class="sectionTitle">最新音乐</h2>
       <ol id="songs" class="list">
       </ol>
@@ -50,11 +52,12 @@
   <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
   <script src="./js/admin/initializers/AV.js"></script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-
+  <script src="../node_modules/axios/dist/axios.min.js"></script>
 
   <script src="./js/eventHub.js"></script>
-  <script src="./js/newSong.js"></script>
-
+  <script src="./js/index/newSong.js"></script>
+  <script src="./js/index/searchform.js"></script>
+  <script src="./js/index/songlist.js"></script>
 </body>
 
 </html>
