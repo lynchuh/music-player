@@ -40,14 +40,15 @@
       })
       this.view.$el.find('#myForm').on('submit',(e)=>{
         e.preventDefault()
-        var v= JSON.stringify( $('#myForm').serializeArray())
-        console.log('1')
-        axios({
-          method: 'GET',
-          url: '/src/search.html',
-          data: v
-        });
-        console.log('2')
+        let formdata= JSON.stringify( $('#myForm').serializeArray())
+        let value
+        $('#myForm').serializeArray().map((data)=>{
+          value=data.value
+        })
+        console.log('form表单提交的数据')
+        console.log(formdata)
+        console.log('您要搜索的内容是：')
+        console.log(value)
       })
     },
     bindEventHub(){},

@@ -94,7 +94,8 @@ section.topBar .logo img{
 section.topBar .title h1{
   flex: 1;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
+  color: #353434;
 }
 section.topBar .searchMusic img{
   height: 5vw;
@@ -180,6 +181,7 @@ section.songListWrapper h2{
   height: 12.5vw;
   line-height: 12.5vw;
   position: relative;
+  color: #353434;
 }
 
 
@@ -225,6 +227,7 @@ section.newSongs h2.sectionTitle{
   line-height: 12.5vw;
   margin: 1vw 2vw;
   position: relative;
+  color: #353434;
 }
 section.newSongs h2::after{
   content: '';
@@ -235,7 +238,7 @@ section.newSongs h2::after{
   position: absolute;
   bottom: 0;
   left: 0;
-  transform: scaleY(.2)
+  transform: scaleY(.4)
 }
 
 section.newSongs ol.list{
@@ -257,10 +260,10 @@ section.newSongs ol.list li{
 section.newSongs ol.list li::after{
   content: '';
   display: block;
-  background-color: rgb(197, 184, 184);
+  background-color: #978d8d;
   width: 100%;
   height: 1px;
-  transform: scaleY(0.4);
+  transform: scaleY(.2);
   position: absolute;
   bottom:0;
   left: 0; 
@@ -275,6 +278,9 @@ section.newSongs ol.list li .descript{
   flex-direction: column;
   margin-left: 6vw;
   font-size: 14px;
+}
+section.newSongs ol.list li .descript .name{
+  color: #353434;
 }
 section.newSongs ol.list li .descript .singer{
   font-size: 12px;
