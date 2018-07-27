@@ -47,27 +47,7 @@
       this.model = model
       this.model.find()
       this.view.init(this.model.data)
-      window.eventHub.on('uploaded', (data) => {
-        this.view.activeItem('h1')
-      })
-      window.eventHub.on('create', (data) => {
-        this.model.data.songs.push(data)
-        this.view.render(this.model.data)
-        this.view.activeItem(`li[data-song-id=${data.id}]`)
-        window.eventHub.emit('selectLi',data)
-      })
-      window.eventHub.on('update',(data)=>{
-        let modelSong = this.model.data.songs
-        for(let i=0;i<modelSong.length;i++){
-          if(modelSong[i].id===data.id){
-            Object.assign(modelSong[i],data)
-            break
-          }
-        }
-        this.view.render(this.model.data)
-        window.eventHub.emit('selectLi',data)
-        this.view.activeItem(`li[data-song-id=${data.id}]`)
-      })
+      this.bindEventHub()
       this.getAllSongs()
       this.bindEvent()
     },
@@ -92,6 +72,29 @@
       })
       $(this.view.el).on('click','h1',(e)=>{
         window.eventHub.emit('uploaded')
+      })
+    },
+    bindEventHub(){
+      window.eventHub.on('uploaded', (data) => {
+        this.view.activeItem('h1')
+      })
+      window.eventHub.on('create', (data) => {
+        this.model.data.songs.push(data)
+        this.view.render(this.model.data)
+        this.view.activeItem(`li[data-song-id=${data.id}]`)
+        window.eventHub.emit('selectLi',data)
+      })
+      window.eventHub.on('update',(data)=>{
+        let modelSong = this.model.data.songs
+        for(let i=0;i<modelSong.length;i++){
+          if(modelSong[i].id===data.id){
+            Object.assign(modelSong[i],data)
+            break
+          }
+        }
+        this.view.render(this.model.data)
+        window.eventHub.emit('selectLi',data)
+        this.view.activeItem(`li[data-song-id=${data.id}]`)
       })
     }
   }

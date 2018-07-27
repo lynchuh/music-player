@@ -2,7 +2,6 @@
   let view = {
     el: '#songForm',
     template: `
-    
     <form action="">
       <div class="row">
         <label for=""> <span>歌名：</span>
@@ -29,7 +28,6 @@
       </div>
     </form>
     `,
-    // 务必搞懂↓
     render(data = {}) { //data={} 给参数一个默认值，默认值为{}
       let placeholders = ['name', 'url', 'singer','cover']
       let html = this.template
@@ -46,7 +44,6 @@
     reset() {
       this.render({})
     }
-    //务必搞懂↑
   }
   let model = {
     data: {
@@ -97,6 +94,31 @@
       this.model = model
       this.view.render(this.model.data)
       this.bindEvent()
+      this.bindEventHub()
+    },
+    bindEvent() {
+      $(this.view.el).on('submit', 'form', (e) => {
+        e.preventDefault()
+        let need = 'name singer url cover'.split(' ') //得到一个数组
+        let data = []
+        need.map((string) => {
+          data[string] =
+            $(this.view.el).find(`input[name="${string}"]`).val()
+        })
+        if (this.model.data.id) { //id存在，即是要更新信息
+          this.model.update(data).then(() => {
+            window.eventHub.emit('update', this.model.data)
+          })
+        } else {//id 不存在，即是要增加信息
+          this.model.create(data)
+            .then(() => {
+              this.view.reset()
+              window.eventHub.emit('create', this.model.data)
+            })
+        }
+      })
+    },
+    bindEventHub(){
       window.eventHub.on('uploaded', (data) => {
         if (this.model.data.id) {
           this.model.data = {
@@ -123,29 +145,6 @@
         console.log(data)
         this.model.data = data
         this.view.render(this.model.data)
-      })
-    },
-    bindEvent() {
-      $(this.view.el).on('submit', 'form', (e) => {
-        e.preventDefault()
-        let need = 'name singer url cover'.split(' ') //得到一个数组
-        let data = []
-        need.map((string) => {
-          data[string] =
-            $(this.view.el).find(`input[name="${string}"]`).val()
-        })
-        if (this.model.data.id) { //id存在，即是要更新信息
-          this.model.update(data).then(() => {
-            //更新数据到数据库之后要做的事
-            window.eventHub.emit('update', this.model.data)
-          })
-        } else {//id 不存在，即是要增加信息
-          this.model.create(data)
-            .then(() => {
-              this.view.reset()
-              window.eventHub.emit('create', this.model.data)
-            })
-        }
       })
     }
   }

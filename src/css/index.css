@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0
+}
+
+* {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: Helvetica, "Hiragino Sans GB", "Microsoft Yahei", 微软雅黑, Arial, sans-serif;
+}
+
+*::after {
+  box-sizing: border-box
+}
+
+*::before {
+  box-sizing: border-box
+}
+
+ul,
+li {
+  list-style: none
+}
+
+a {
+  text-decoration: none;
+  color: inherit
+}
+
+button,
+input {
+  outline: none;
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 4px;
+}
+
+button {
+  cursor: pointer;
+}
+
+body{
+  font-size: 16px;
+  color: #757272;
+}
+
+.page{
+  display: flex;
+  flex-direction: column;
+  background: rgba(184, 184, 184,0.5)
+}
+
+
+/**100vw=241px**/
+section.topbar{
+  display: flex;
+  flex-direction: row;
+  height: 16vw;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0 3vw;
+}
+section.topbar .logo,
+section.topbar .searchMusic{
+  height: 9vw;
+  width: 9vw;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section.topbar .logo{
+  margin-right: auto;
+}
+section.topbar .searchMusic{
+  margin-left: auto;
+}
+
+section.topbar .logo img{
+  height: 7vw;
+  width: 7vw;
+}
+section.topbar .searchMusic img{
+  height: 5vw;
+  width: 5vw;
+}
+section.topbar .title h1{
+  flex: 1;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
+section.songListWrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 0 1vw 3vw;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+section.songListWrapper h2{
+  font-size: 16px;
+  font-weight: 550;
+  height: 11vw;
+  line-height: 11vw;
+}
+
+section.songListWrapper ol {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 0 1vw;
+}
+section.songListWrapper ol li {
+  width: 30vw;
+  border-radius: 4px;
+  background-color: #fff;
+  color: darkslategrey;
+}
+section.songListWrapper ol li img{
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+}
+section.songListWrapper ol li .title{
+  font-size: 12px;
+  padding:1vw 2vw;
+}
+
+section.songs{
+  box-shadow: 8px 0 40px 0 rgba(0, 0, 0, .3);
+  background-color: rgba(124, 124, 104, 0.1);
+  margin-top: 3vw; 
+}
+
+
+
+section.songs h2.sectionTitle{
+  font-size: 16px;
+  font-weight: 550;
+  height: 12.5vw;
+  line-height: 12.5vw;
+  margin: 1vw 2vw;
+}
+section.songs ol.list{
+  display: flex;
+  flex-direction: column;
+}
+section.songs ol.list li{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin:  1vw 6vw ;
+  height: 20vw;
+  position: relative;
+  background: url(../img/music.png) no-repeat;
+  background-size: cover;
+  
+}
+section.songs ol.list li::after{
+  content: '';
+  display: block;
+  background-color: #ddd;
+  width: 100%;
+  height: 1px;
+  transform: scaleY(0.4);
+  position: absolute;
+  bottom:0;
+  left: 0; 
+}
+section.songs ol.list li img.cover{
+  width: 14.5vw;
+  height: 14.5vw;
+}
+section.songs ol.list li .descript{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 6vw;
+  font-size: 14px;
+}
+section.songs ol.list li .descript .singer{
+  font-size: 12px;
+  margin:2vw 1vw;
+
+}
+section.songs ol.list li .play img{
+  width: 6.8vw;
+  height: 6.8vw;
+}

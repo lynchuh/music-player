@@ -2,7 +2,6 @@
   let view = {
     el: '#uploadArea',
     init() {
-
       this.$el = $(this.el)
     }
   }
@@ -16,7 +15,6 @@
       this.view.init()
       this.initQiniu(this.view.$el.find('#uploadSong'), this.uploadSong)
       this.initQiniu(this.view.$el.find('#uploadCover'),this.uploadCover)
-
     },
     initQiniu($targetElement, callback) {
       let uploader = Qiniu.uploader({
@@ -39,10 +37,10 @@
               // 文件添加进队列后,处理相关的事情
             });
           },
-          'BeforeUpload': (up, file) => {
+          'BeforeUpload': (up, file) => {//上传前
             // 每个文件上传前,处理相关的事情
           },
-          'UploadProgress': (up, file) => {
+          'UploadProgress': (up, file) => {//上传中
             window.eventHub.emit('uploading')
           },
           'FileUploaded': (up, file, info) => {
