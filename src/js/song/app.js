@@ -4,24 +4,21 @@
     template: `
       <audio src={{url}}></audio>
     `,
-    render() {
+    init() {
+      this.audio=$(this.el).find('audio')[0]
+      this.$el=$(this.el)
+    },
 
-    },
-    find(selector) {
-      return $(this.el).find(selector)[0]
-    },
     uploadMusic(data) {
-      let audio = this.find('audio')
-      audio.src = data.url
+      this.audio.src = data.url
     },
     toggleStatus(status) {
-      let audio = this.find('audio')
       if (status) {
-        $(this.find('.disc-container')).addClass('active')
-        audio.play()
+        this.$el.find('.disc-container').addClass('active')
+        this.audio.play()
       } else {
-        $(this.find('.disc-container')).removeClass('active')
-        audio.pause()
+        this.$el.find('.disc-container').removeClass('active')
+        this.audio.pause()
       }
     }
   }
@@ -46,10 +43,12 @@
   let controller = {
     init(view, model) {
       this.view = view
+      this.view.init()
       this.model = model
       this.getSongId()
       this.model.fetch().then((data) => {
         this.view.uploadMusic(this.model.data.song)
+        console.dir(this.view.audio)
       })
       this.bindEvent()
     },
@@ -57,8 +56,12 @@
       $(this.view.el).on('click', '.icon-wrapper', (e) => {
         e.preventDefault()
         this.model.data.status = !this.model.data.status
-        console.log(this.model.data)
         this.view.toggleStatus(this.model.data.status)
+      })
+      this.view.audio.addEventListener('ended',()=>{
+        this.model.data.status=true
+        this.view.$el.find('.disc-container').addClass('active')
+        console.log('歌曲播放完了')
       })
     },
     getSongId() {
