@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -26,6 +27,7 @@
         <img src="#" alt="" class="cover">
       </div>
     </div>
+
     <div class="song-description">
       <h1></h1>
       <div class="lyric">
@@ -33,6 +35,14 @@
 
         </div>
       </div>
+    </div>
+    <div class="controller">
+      <progress value="0" max="0" id="pro"></progress>
+      <div class="loopControl">
+        <img src="./img/loop.png" alt="" class="loop">
+        <img src="./img/noloop.png" alt="" class="noLoop">
+      </div>
+      <input type="range" min="0" max="100" value="50" id="voiceControl"/>
     </div>
   </div>
   <script src="//at.alicdn.com/t/font_395875_4hwrep7mypx8ncdi.js"></script>

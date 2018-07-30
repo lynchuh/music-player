@@ -13,13 +13,20 @@
       this.audio.src = data.url
       this.$el.find('.cover')[0].src = data.cover
     },
-    toggleStatus(status) {
+    togglePlayStatus(status) {
       if (status) {
         this.$el.find('.disc-container').addClass('active')
         this.audio.play()
       } else {
         this.$el.find('.disc-container').removeClass('active')
         this.audio.pause()
+      }
+    },
+    toggleLoopStatus(status){
+      if(status){
+        this.$el.find('.loopControl').addClass('active')
+      }else{
+        this.$el.find('.loopControl').removeClass('active')
       }
     }
   }
@@ -33,6 +40,8 @@
       },
       status: false,
       currentTime: undefined,
+      audio:undefined,
+      loopStatus:false,
     },
     fetch() {
       var query = new AV.Query('Song')
@@ -53,31 +62,6 @@
       })
       this.bindEvent()
     },
-    bindEvent() {
-      let timeId 
-      $(this.view.el).on('click', '.icon-wrapper', (e) => {
-        e.preventDefault()
-        this.model.data.status = !this.model.data.status
-        this.view.toggleStatus(this.model.data.status)
-      })
-      this.view.audio.addEventListener('ended', () => {
-        this.model.data.status = false
-        this.view.$el.find('.disc-container').removeClass('active')
-        console.log('歌曲播放完了')
-        window.clearInterval(timeId)
-      })
-      this.view.audio.addEventListener('play', () => {
-          timeId = window.setInterval((e) => {
-          this.model.currentTime = this.view.audio.currentTime
-          console.log(this.model.currentTime)
-        }, 1000)
-        // console.log(this.view.audio.duration)
-      })
-      this.view.audio.addEventListener('pause', () => {
-        window.clearInterval(timeId)
-      })
-
-    },
     getSongId() {
       let search = window.location.search
       if (search.indexOf('?') === 0) {
@@ -96,6 +80,53 @@
       }
       this.model.data.id = id
     },
+    bindEvent() {
+      let timeId
+      this.view.$el.on('click', '.icon-wrapper', (e) => {
+        e.preventDefault()
+        this.model.data.status = !this.model.data.status
+        this.view.togglePlayStatus(this.model.data.status)
+      })
+      this.view.$el.on('click','.loopControl',(e)=>{
+        this.model.data.loopStatus =!this.model.data.loopStatus
+        this.view.toggleLoopStatus(this.model.data.loopStatus)
+      })
+
+
+
+
+      this.view.audio.addEventListener('ended', () => {
+        this.model.data.status = false
+        this.view.$el.find('.disc-container').removeClass('active')
+        console.log('歌曲播放完了')
+        window.clearInterval(timeId)
+      })
+      this.view.audio.addEventListener('play', () => {
+        let total = this.view.audio.duration
+        this.view.$el.find('progress')[0].max=total
+        
+        timeId = window.setInterval((e) => {
+          this.model.currentTime = this.view.audio.currentTime
+          let total = this.view.audio.duration
+          this.view.$el.find('progress')[0].value=this.model.currentTime
+        }, 500)
+      })
+      this.view.audio.addEventListener('pause', () => {
+        window.clearInterval(timeId)
+      })
+
+
+
+
+      this.view.$el.on('click','.loopControl',(e)=>{
+        this.view.audio.loop=!this.view.audio.loop
+        this.view.toggleLoopStatus(this.view.audio.loop)
+      })
+      voiceControl.addEventListener('change',(e)=>{
+        this.view.audio.volume=voiceControl.value/100
+      })
+    },
+
   }
   controller.init(view, model)
 }
