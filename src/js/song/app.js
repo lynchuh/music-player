@@ -28,6 +28,9 @@
       }else{
         this.$el.find('.loopControl').removeClass('active')
       }
+    },
+    progressControl(progressWidth){
+      this.view.$el.find('.progress').css(`width`,`${progressWidth}vw`)
     }
   }
   let model = {
@@ -39,8 +42,6 @@
         url: ''
       },
       status: false,
-      currentTime: undefined,
-      audio:undefined,
       loopStatus:false,
     },
     fetch() {
@@ -91,24 +92,20 @@
         this.model.data.loopStatus =!this.model.data.loopStatus
         this.view.toggleLoopStatus(this.model.data.loopStatus)
       })
-
-
-
-
       this.view.audio.addEventListener('ended', () => {
         this.model.data.status = false
         this.view.$el.find('.disc-container').removeClass('active')
         console.log('歌曲播放完了')
+        this.view.progressControl(this.model.data.totalTime)
         window.clearInterval(timeId)
+
       })
       this.view.audio.addEventListener('play', () => {
-        let total = this.view.audio.duration
-        this.view.$el.find('progress')[0].max=total
-        
+        this.model.totalTime=this.view.audio.duration
         timeId = window.setInterval((e) => {
           this.model.currentTime = this.view.audio.currentTime
-          let total = this.view.audio.duration
-          this.view.$el.find('progress')[0].value=this.model.currentTime
+          progressWidth=(this.model.currentTime/this.model.totalTime)*88
+          this.view.progressControl(progressWidth)
         }, 500)
       })
       this.view.audio.addEventListener('pause', () => {
