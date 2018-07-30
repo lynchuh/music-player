@@ -5,12 +5,13 @@
       <audio src={{url}}></audio>
     `,
     init() {
-      this.audio=$(this.el).find('audio')[0]
-      this.$el=$(this.el)
+      this.audio = $(this.el).find('audio')[0]
+      this.$el = $(this.el)
     },
 
     uploadMusic(data) {
       this.audio.src = data.url
+      this.$el.find('.cover')[0].src = data.cover
     },
     toggleStatus(status) {
       if (status) {
@@ -31,6 +32,7 @@
         url: ''
       },
       status: false,
+      currentTime: undefined,
     },
     fetch() {
       var query = new AV.Query('Song')
@@ -48,21 +50,33 @@
       this.getSongId()
       this.model.fetch().then((data) => {
         this.view.uploadMusic(this.model.data.song)
-        console.dir(this.view.audio)
       })
       this.bindEvent()
     },
     bindEvent() {
+      let timeId 
       $(this.view.el).on('click', '.icon-wrapper', (e) => {
         e.preventDefault()
         this.model.data.status = !this.model.data.status
         this.view.toggleStatus(this.model.data.status)
       })
-      this.view.audio.addEventListener('ended',()=>{
-        this.model.data.status=true
-        this.view.$el.find('.disc-container').addClass('active')
+      this.view.audio.addEventListener('ended', () => {
+        this.model.data.status = false
+        this.view.$el.find('.disc-container').removeClass('active')
         console.log('歌曲播放完了')
+        window.clearInterval(timeId)
       })
+      this.view.audio.addEventListener('play', () => {
+          timeId = window.setInterval((e) => {
+          this.model.currentTime = this.view.audio.currentTime
+          console.log(this.model.currentTime)
+        }, 1000)
+        // console.log(this.view.audio.duration)
+      })
+      this.view.audio.addEventListener('pause', () => {
+        window.clearInterval(timeId)
+      })
+
     },
     getSongId() {
       let search = window.location.search
@@ -85,4 +99,3 @@
   }
   controller.init(view, model)
 }
-
