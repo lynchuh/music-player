@@ -30,9 +30,6 @@
         this.$el.find('.loopControl').removeClass('active')
       }
     },
-    progressControl(progressWidth) {
-      this.$el.find('.progress').css(`width`, `${progressWidth}vw`)
-    },
     drawProgressCircle(canvas, percentage) {
       let radius = Math.floor($(window).width() * 44.5 / 100) * 0.5 
       let translate = $(window).width() / 2
@@ -115,7 +112,6 @@
         this.view.drawProgressCircle(this.view.canvas)
       })
       this.view.audio.addEventListener('timeupdate', () => {//歌曲播放时状态
-        let progressWidth = (this.view.audio.currentTime / this.view.audio.duration) * 88
         let percentage=this.view.audio.currentTime / this.view.audio.duration
         this.view.drawProgressCircle(this.view.canvas,percentage)
       })

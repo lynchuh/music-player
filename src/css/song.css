@@ -145,25 +145,6 @@
 .controller .loopControl.active .noLoop{
   display: none;
 }
-
 .controller .loopControl .noLoop{
   display: block;
-}
-
-
-
-
-.progressBar{
-  width: 88vw;
-  height: 1vw;
-  background-color: #fff;
-  position: relative;
-}
-.progress{
-  /* width: 10vw; */
-  height: 1vw;
-  background-color:red;
-  position: absolute;
-  left: 0;
-  bottom: 0;
 }
