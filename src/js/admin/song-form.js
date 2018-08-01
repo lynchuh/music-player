@@ -28,7 +28,7 @@
       </div>
     </form>
     `,
-    render(data = {}) { //data={} 给参数一个默认值，默认值为{}
+    render(data = {}) { 
       let placeholders = ['name', 'url', 'singer','cover']
       let html = this.template
       placeholders.map((string) => {
