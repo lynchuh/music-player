@@ -1,6 +1,6 @@
 * {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 * {
@@ -8,27 +8,28 @@
 }
 
 * {
-  font-family: Helvetica, "Hiragino Sans GB", "Microsoft Yahei", 微软雅黑, Arial, sans-serif;
+  font-family: Helvetica, "Hiragino Sans GB", "Microsoft Yahei", 微软雅黑, Arial,
+    sans-serif;
   font-size: 12px;
   color: blanchedalmond;
 }
 
 *::after {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 *::before {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 ul,
 li {
-  list-style: none
+  list-style: none;
 }
 
 a {
   text-decoration: none;
-  color: inherit
+  color: inherit;
 }
 
 button,
@@ -48,7 +49,7 @@ input:-webkit-autofill {
 }
 
 .clearfix::after {
-  content: '';
+  content: "";
   display: block;
   clear: both;
 }
@@ -60,7 +61,7 @@ input:-webkit-autofill {
 ::-webkit-scrollbar-thumb:horizontal {
   /*水平滚动条的样式*/
   width: 4px;
-  background-color: #CCCCCC;
+  background-color: #cccccc;
   -webkit-border-radius: 6px;
 }
 
@@ -104,14 +105,14 @@ input:-webkit-autofill {
 }
 
 .page::after {
-  content: '';
+  content: "";
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color: rgba(87, 85, 85, 0.459)
+  background-color: rgba(87, 85, 85, 0.459);
 }
 
-.page>* {
+.page > * {
   z-index: 1;
 }
 
@@ -121,7 +122,7 @@ aside {
   width: 25%;
   min-width: 100px;
   background-color: rgba(87, 85, 85, 0.459);
-  box-shadow: 8px 0 40px 0 rgba(0, 0, 0, .3)
+  box-shadow: 8px 0 40px 0 rgba(0, 0, 0, 0.3);
 }
 
 aside h1 {
@@ -135,7 +136,7 @@ aside h1 {
 }
 
 aside h1::after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   height: 1px;
@@ -143,7 +144,7 @@ aside h1::after {
   bottom: 0;
   left: 0;
   background-color: rgba(70, 69, 69, 0.8);
-  transform: scaleY(0.5)
+  transform: scaleY(0.5);
 }
 
 aside .songlistArea {
@@ -161,7 +162,7 @@ aside .songList li {
 }
 
 aside .songList li::after {
-  content: '';
+  content: "";
   display: block;
   width: 90%;
   border-bottom: 1px dashed #4d4d4d;
@@ -190,7 +191,7 @@ main {
 }
 
 main .uploadArea {
-  box-shadow: 8px 0 40px 0 rgba(0, 0, 0, .3);
+  box-shadow: 8px 0 40px 0 rgba(0, 0, 0, 0.3);
   border-radius: 6px;
   max-height: 350px;
   width: 80%;
@@ -221,7 +222,7 @@ main .uploadArea #uploadCover {
 main .uploadArea #uploadSong p,
 main .uploadArea #uploadCover p {
   flex: 0;
-  text-align: center
+  text-align: center;
 }
 
 main .uploadArea #uploadSong button,
@@ -232,7 +233,7 @@ main .uploadArea #uploadCover button {
   width: 20%;
   min-height: 30px;
   margin-top: 1.5vw;
-  min-width:42px;
+  min-width: 42px;
 }
 
 main .songformArea {
@@ -247,32 +248,48 @@ main .songformArea h1 {
   font-size: 20px;
   font-weight: bold;
   letter-spacing: 2px;
-  /* margin-bottom: 18px; */
 }
-main .songformArea form{
+
+main .songformArea form {
   display: flex;
   width: 80%;
   margin: 14px 0;
   padding-top: 28px;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content:flex-start;
-  justify-content: center;
-  box-shadow:8px 0 40px 0 rgba(0, 0, 0, .3)
+  flex-direction: column;
+  box-shadow: 8px 0 40px 0 rgba(0, 0, 0, 0.3);
 }
 main .songformArea form .row {
   margin: 16px 0;
-  width: 45%;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  width: 80%;
 }
+main .songformArea form .row label {
+  display: flex;
+  margin: 10px 36px;
+  width: 100%;
+}
+main .songformArea form .row span {
+  width:55px;
+  padding-right: 10px;
+}
+main .songformArea form .row textarea {
+  height: 100px;
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #ddd;
 
-main .songformArea form .row:last-child {
+}
+main .songformArea form .row textarea:focus,
+main .songformArea form .row textarea:active {
+  outline: 0px;
+}
+/* main .songformArea form .row:last-child {
   margin-top: 24px;
   flex-grow: 1;
-  /* background-color: red; */
-}
-main .songformArea form .row input{
+} */
+main .songformArea form .row input {
   width: 80%;
 }
 main .songformArea form .row button {
@@ -298,15 +315,15 @@ main .songformArea form .row button {
 
 @keyframes loading {
   0% {
-    transform: scale(1.0)
+    transform: scale(1);
   }
   100% {
-    transform: scale(0.1)
+    transform: scale(0.1);
   }
 }
 
 .site-loading::after {
-  content: '';
+  content: "";
   display: block;
   width: 100px;
   height: 100px;

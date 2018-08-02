@@ -7,8 +7,6 @@
         <label for=""> <span>歌名：</span>
           <input name="name" type="text" value="__name__">
         </label>
-      </div>
-      <div class="row">
         <label for=""><span>歌手：</span>
           <input name="singer" type="text" value="__singer__">
         </label>
@@ -17,19 +15,22 @@
         <label for=""><span>外链：</span>
           <input name="url" type="text" value="__url__">
         </label>
-      </div>
-      <div class="row">
-      <label for=""><span>封面：</span>
+        <label for=""><span>封面：</span>
         <input name="cover" type="text" value="__cover__">
       </label>
-    </div>
+      </div>
+      <div class="row">
+        <label><span>歌词</span>
+        <textarea name="lyric">__lyric__</textarea>
+        </label>
+      </div>
       <div class="row">
         <button type="submit">保存</button>
       </div>
     </form>
     `,
     render(data = {}) { 
-      let placeholders = ['name', 'url', 'singer','cover']
+      let placeholders = ['name', 'url', 'singer','cover','lyric']
       let html = this.template
       placeholders.map((string) => {
         html = html.replace(`__${string}__`, data[string] || '')
@@ -51,6 +52,7 @@
       singer: '',
       url: '',
       cover:'',
+      lyric:'',
       id: ''
     },
     create(data) { //将form上的信息保存到leancloud，会生成一个id
@@ -59,8 +61,10 @@
       songs.set('name', data.name);
       songs.set('singer', data.singer);
       songs.set('url', data.url);
+      songs.set('lyric', data.lyric);
       songs.set('cover', data.cover);
       return songs.save().then((newSong) => {
+        console.log(newSong)
         let {
           id,
           attributes
@@ -78,6 +82,7 @@
       song.set('name', data.name)
       song.set('singer', data.singer)
       song.set('url', data.url)
+      song.set('lyric', data.lyric)
       song.set('cover', data.cover)
       return song.save()
         .then(() => {
@@ -97,11 +102,11 @@
     bindEvent() {
       $(this.view.el).on('submit', 'form', (e) => {
         e.preventDefault()
-        let need = 'name singer url cover'.split(' ') //得到一个数组
+        let need = 'name singer url lyric cover'.split(' ') //得到一个数组
         let data = []
         need.map((string) => {
           data[string] =
-            $(this.view.el).find(`input[name="${string}"]`).val()
+            $(this.view.el).find(`[name="${string}"]`).val()
         })
         if (this.model.data.id) { //id存在，即是要更新信息
           this.model.update(data).then(() => {
@@ -124,6 +129,7 @@
             name: '',
             singer: '',
             url: '',
+            lyric:'',
             cover:''
           }
         } else {

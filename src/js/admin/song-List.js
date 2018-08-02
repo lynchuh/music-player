@@ -12,11 +12,15 @@
       let $el = $(this.el)
       $el.html(this.template)
       let songs = data.songs
-      let liList = songs.map((song) => $('<li></li>').text(song.name).attr('data-song-id',song.id))
+      let liList = songs.map((song) => {
+        let content=`${song.name}-${song.singer}`
+        return $('<li></li>').text(content).attr('data-song-id',song.id)
+      })
       $el.find('ul.songList').empty()
       liList.map((domLi) => {
-        $el.find('ul').append(domLi)
+        $el.find('ul.songList').append(domLi)
       })
+
     },
     reset() {
       this.render(this.model.data)
