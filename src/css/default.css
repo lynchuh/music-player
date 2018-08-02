@@ -285,10 +285,6 @@ main .songformArea form .row textarea:focus,
 main .songformArea form .row textarea:active {
   outline: 0px;
 }
-/* main .songformArea form .row:last-child {
-  margin-top: 24px;
-  flex-grow: 1;
-} */
 main .songformArea form .row input {
   width: 80%;
 }

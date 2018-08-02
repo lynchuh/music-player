@@ -13,6 +13,7 @@
     uploadMusic(data) {
       this.audio.src = data.url
       this.$el.find('.cover')[0].src = data.cover ? data.cover : './img/song-list/list-1.jpg'
+      this.$el.find('.song-description h1').text(data.name)
     },
     togglePlayStatus(status) {
       if (status) {
@@ -31,12 +32,12 @@
       }
     },
     drawProgressCircle(canvas, percentage) {
-      let radius = Math.floor($(window).width() * 44.5 / 100) * 0.5 
+      let radius = Math.floor($(window).width() * 44.5 / 100) * 0.5
       let translate = $(window).width() / 2
       let context = canvas.getContext('2d')
       canvas.setAttribute('width', `${$(window).width()}px`)
       canvas.setAttribute('height', `${$(window).width() * 0.75}px`)
-      context.translate(translate, translate*0.75)
+      context.translate(translate, translate * 0.75)
       context.beginPath()
       context.arc(0, 0, radius, 0, Math.PI * 2, false)
       context.lineWidth = 10
@@ -47,6 +48,28 @@
       context.lineWidth = 10
       context.strokeStyle = "rgba(70,70,70,0.5)"
       context.stroke()
+    },
+    parseLyric(lyrics) {
+      lyrics.split('\n').map((lyric) => {
+        let Reg = /\[([\d:.]+)\](.+)/
+        let matches = lyric.match(Reg)
+        if (matches) {
+          let timepart = matches[1].split(':')
+          let minutes = timepart[0],
+            seconds = timepart[1]
+          let newTime = parseInt(minutes, 10) * 60 + parseFloat(seconds, 10)
+          $('<p></p>').text(matches[2])
+            .attr('data-time', newTime)
+            .appendTo('.lyric>.lines')
+        } else {
+          $('<p></p>').text(lyric).appendTo('.lyric>.lines')
+        }
+      })
+    },
+    showLyric(time){
+      let lyrics = this.$el.find('.lyric .lines p')
+      let lyric
+      console.log(lyrics)
     }
   }
   let model = {
@@ -55,7 +78,8 @@
         id: '',
         name: '',
         singer: '',
-        url: ''
+        url: '',
+        lyric: '',
       },
       status: false,
     },
@@ -74,8 +98,9 @@
       this.model = model
       this.getSongId()
       this.model.fetch().then((data) => {
-        this.view.uploadMusic(this.model.data.song)
-        this.view.drawProgressCircle(this.view.canvas)
+        this.view.uploadMusic(this.model.data.song)//加载歌曲信息
+        this.view.drawProgressCircle(this.view.canvas)//进度条
+        this.view.parseLyric(this.model.data.song.lyric)//歌词解析渲染
       })
       this.bindEvent()
     },
@@ -98,25 +123,29 @@
       this.model.data.id = id
     },
     bindEvent() {
-      this.view.$el.on('click', '.icon-wrapper', (e) => {//play/pause Btn
+      this.view.$el.on('click', '.icon-wrapper', (e) => { //play/pause Btn
         this.model.data.status = !this.model.data.status
         this.view.togglePlayStatus(this.model.data.status)
       })
-      this.view.$el.on('click', '.loopControl', (e) => {// loop Btn
+      this.view.$el.on('click', '.loopControl', (e) => { // loop Btn
         this.view.audio.loop = !this.view.audio.loop
         this.view.toggleLoopStatus(this.view.audio.loop)
       })
-      this.view.audio.addEventListener('ended', () => {//歌曲结束状态
+      this.view.audio.addEventListener('ended', () => { //歌曲结束状态
         this.model.data.status = false
         this.view.$el.find('.disc-container').removeClass('active')
         this.view.drawProgressCircle(this.view.canvas)
       })
-      this.view.audio.addEventListener('timeupdate', () => {//歌曲播放时状态
-        let percentage=this.view.audio.currentTime / this.view.audio.duration
-        this.view.drawProgressCircle(this.view.canvas,percentage)
+      this.view.audio.addEventListener('timeupdate', () => { //歌曲播放时状态
+        let percentage = this.view.audio.currentTime / this.view.audio.duration
+        this.view.drawProgressCircle(this.view.canvas, percentage)
+        this.view.showLyric(this.view.audio.currentTime)
       })
     },
     
+
+
+
 
 
   }

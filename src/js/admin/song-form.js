@@ -111,12 +111,14 @@
         if (this.model.data.id) { //id存在，即是要更新信息
           this.model.update(data).then(() => {
             window.eventHub.emit('update', this.model.data)
+            window.alert("修改成功")
           })
         } else {//id 不存在，即是要增加信息
           this.model.create(data)
             .then(() => {
               this.view.reset()
               window.eventHub.emit('create', this.model.data)
+              window.alert('上传成功')
             })
         }
       })

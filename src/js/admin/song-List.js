@@ -16,7 +16,6 @@
         let content=`${song.name}-${song.singer}`
         return $('<li></li>').text(content).attr('data-song-id',song.id)
       })
-      $el.find('ul.songList').empty()
       liList.map((domLi) => {
         $el.find('ul.songList').append(domLi)
       })
