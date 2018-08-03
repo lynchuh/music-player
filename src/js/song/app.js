@@ -68,8 +68,27 @@
     },
     showLyric(time){
       let lyrics = this.$el.find('.lyric .lines p')
-      let lyric
-      console.log(lyrics)
+      let currentlyric
+      for (let i=0;i<lyrics.length;i++){
+        if(i===lyrics.length-1){
+          currentlyric=lyrics[i]
+          break
+        }else{
+          let currentTime=lyrics.eq(i).attr('data-time'),
+              nextTime=lyrics.eq(i+1).attr('data-time')
+          if(time>=currentTime && time < nextTime){
+            currentlyric=lyrics[i]
+            break
+          }
+        }
+      }
+      let currentLyricHeight=currentlyric.getBoundingClientRect().top
+      let linesHeight = this.$el.find('.lyric>.lines')[0].getBoundingClientRect().top
+      let height = currentLyricHeight - linesHeight
+      height >= 80 && this.$el.find('.lyric>.lines').css({
+        transform: `translateY(${- (height - 60)}px)`
+      })
+      $(currentlyric).addClass('active').siblings('.active').removeClass('active')
     }
   }
   let model = {

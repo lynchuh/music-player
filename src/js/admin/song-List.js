@@ -74,13 +74,13 @@
         window.eventHub.emit('selectLi',data)
       })
       $(this.view.el).on('click','h1',(e)=>{
-        window.eventHub.emit('uploaded')
+        window.eventHub.emit('uploadNew')
+        this.view.activeItem('h1')
+
       })
     },
     bindEventHub(){
-      window.eventHub.on('uploaded', (data) => {
-        this.view.activeItem('h1')
-      })
+
       window.eventHub.on('create', (data) => {
         this.model.data.songs.push(data)
         this.view.render(this.model.data)

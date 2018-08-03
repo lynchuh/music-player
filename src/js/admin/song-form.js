@@ -125,18 +125,30 @@
     },
     bindEventHub(){
       window.eventHub.on('uploaded', (data) => {
-        if (this.model.data.id) {
-          this.model.data = {
-            id: '',
-            name: '',
-            singer: '',
-            url: '',
-            lyric:'',
-            cover:''
-          }
-        } else {
+        // if (this.model.data.id) {
+        //   console.log('1')
+        //   this.model.data = {
+        //     id: '',
+        //     name: '',
+        //     singer: '',
+        //     url: '',
+        //     lyric:'',
+        //     cover:''
+        //   }
+        // } else {
           Object.assign(this.model.data, data)
-        }
+        // }
+        this.view.render(this.model.data)
+      })
+      window.eventHub.on('uploadNew',(data)=>{
+        this.model.data = {
+              id: '',
+              name: '',
+              singer: '',
+              url: '',
+              lyric:'',
+              cover:''
+            }
         this.view.render(this.model.data)
       })
       window.eventHub.on('uploadCover',(data)=>{
