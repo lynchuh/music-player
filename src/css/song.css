@@ -139,22 +139,29 @@
   color: blanchedalmond;
   transition: all 0.2s;
 }
-.controller{
-  border:1px solid red;
-  height: 35vw;
-  max-height: 150px ;
+
+.loopControl {
+  height: 10vw;width: 10vw;
+  border-radius: 50%;
+  background-color: rgba(225, 225, 225, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 135vw;
+  left: 4vw;
 }
-.controller .loopControl img{
-  width: 10vw;
-  height: 10vw;
+.loopControl img{
+  width: 8vw;
+  height: 8vw;
   display: none;
 }
-.controller .loopControl.active .loop{
+ .loopControl.active .loop{
   display: block;
 }
-.controller .loopControl.active .noLoop{
+ .loopControl.active .noLoop{
   display: none;
 }
-.controller .loopControl .noLoop{
+.loopControl .noLoop{
   display: block;
 }

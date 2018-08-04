@@ -46,7 +46,7 @@
       context.beginPath()
       context.arc(0, 0, radius, Math.PI * 3 / 2, (Math.PI * 3 / 2 + Math.PI * 2 / 180 + percentage * Math.PI * 2), false)
       context.lineWidth = 10
-      context.strokeStyle = "rgba(70,70,70,0.5)"
+      context.strokeStyle = " rgb(254,249,242)"
       context.stroke()
     },
     parseLyric(lyrics) {
@@ -66,29 +66,32 @@
         }
       })
     },
-    showLyric(time){
+    showLyric(time) {
       let lyrics = this.$el.find('.lyric .lines p')
-      let currentlyric
-      for (let i=0;i<lyrics.length;i++){
-        if(i===lyrics.length-1){
-          currentlyric=lyrics[i]
-          break
-        }else{
-          let currentTime=lyrics.eq(i).attr('data-time'),
-              nextTime=lyrics.eq(i+1).attr('data-time')
-          if(time>=currentTime && time < nextTime){
-            currentlyric=lyrics[i]
+      let $currentLyric
+      for (let i = 0; i < lyrics.length; i++) {
+          let currentTime = lyrics.eq(i).attr('data-time'),
+            nextTime = lyrics.eq(i + 1).attr('data-time')
+          if(time<currentTime){
+            $currentLyric=lyrics.eq(0)
             break
           }
-        }
+          else if (time >= currentTime && time < nextTime) {
+            $currentLyric = lyrics.eq(i)
+            break
+          }
+          if(i===lyrics.length-1){
+            $currentLyric= lyrics.eq(lyrics.length-1)
+          }
       }
-      let currentLyricHeight=currentlyric.getBoundingClientRect().top
-      let linesHeight = this.$el.find('.lyric>.lines')[0].getBoundingClientRect().top
-      let height = currentLyricHeight - linesHeight
+      // console.log(`${$currentLyric.attr('data-time')}:${$currentLyric.text()}`)
+      let currentTop = $currentLyric.offset().top
+      let linesTop = this.$el.find('.lyric>.lines').offset().top
+      let height = currentTop - linesTop
       height >= 80 && this.$el.find('.lyric>.lines').css({
         transform: `translateY(${- (height - 60)}px)`
       })
-      $(currentlyric).addClass('active').siblings('.active').removeClass('active')
+      $currentLyric.addClass('active').siblings('.active').removeClass('active')
     }
   }
   let model = {
@@ -117,9 +120,9 @@
       this.model = model
       this.getSongId()
       this.model.fetch().then((data) => {
-        this.view.uploadMusic(this.model.data.song)//加载歌曲信息
-        this.view.drawProgressCircle(this.view.canvas)//进度条
-        this.view.parseLyric(this.model.data.song.lyric)//歌词解析渲染
+        this.view.uploadMusic(this.model.data.song) //加载歌曲信息
+        this.view.drawProgressCircle(this.view.canvas) //进度条
+        this.view.parseLyric(this.model.data.song.lyric) //歌词解析渲染
       })
       this.bindEvent()
     },
@@ -159,14 +162,12 @@
         let percentage = this.view.audio.currentTime / this.view.audio.duration
         this.view.drawProgressCircle(this.view.canvas, percentage)
         this.view.showLyric(this.view.audio.currentTime)
+        
       })
     },
-    
-
-
-
-
-
+    pad(num){
+      return num>10 ? num + '':'0'+ num
+    }
   }
   controller.init(view, model)
 }
