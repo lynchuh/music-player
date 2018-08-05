@@ -46,7 +46,7 @@
       context.beginPath()
       context.arc(0, 0, radius, Math.PI * 3 / 2, (Math.PI * 3 / 2 + Math.PI * 2 / 180 + percentage * Math.PI * 2), false)
       context.lineWidth = 10
-      context.strokeStyle = " rgb(254,249,242)"
+      context.strokeStyle = " #EED19C"
       context.stroke()
     },
     parseLyric(lyrics) {
