@@ -3,13 +3,11 @@
 > 这个项目是实际仿网易云的，但UI我自己找设计稿重新改了。歌曲及歌单的数据存储使用七牛和leancloud两个数据库进行部署。
 本项目包含了管理端上传页面，但由于个人账号隐私问题，暂时无法提供token实现上传功能。
 ### preview
-<img src="./previewImg/admin.png" width="500px"  />
-<img src="./previewImg/index.jpg" width="250px"  />
-<img src="./previewImg/songlist.jpg" width="250px"  />
-<img src="./previewImg/songPlaying.jpg" width="250px"  />
-<img src="./previewImg/songPlaying.gif" width="250px"  />
-
 [项目在线演示地址](https://lynchuh.github.io/projectPreview/music-player/)
+<img src="./previewImg/admin.png" width="500px"/>
+<img src="./previewImg/index.jpg" width="250px"/><img src="./previewImg/songlist.jpg" width="250px"/>
+<img src="./previewImg/songPlaying.jpg" width="250px"/><img src="./previewImg/songPlaying.gif" width="250px"/>
+
 ### 项目运行
 ```
 git clone https://github.com/lynchuh/music-player.git
