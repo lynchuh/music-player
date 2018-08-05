@@ -16,16 +16,20 @@
     </a>
   </li>`,
     render(data) {
-      let {songs}=data
-      songs.map((song)=>{
-        song.cover=song.cover?song.cover:'./img/song-list/list-1.jpg'
-        let li= this.template
-          .replace('{{song.cover}}',song.cover)
-          .replace('{{song.name}}',song.name)
-          .replace('{{song.singer}}',song.singer)
-          .replace('{{song.id}}',song.id)
-        this.$el.find('ol.list').append(li)
+      let {
+        songs
+      } = data
+      let Song = songs.map((song) => {
+        song.cover = song.cover ? song.cover : './img/song-list/list-1.jpg'
+        return li = this.template
+          .replace('{{song.cover}}', song.cover)
+          .replace('{{song.name}}', song.name)
+          .replace('{{song.singer}}', song.singer)
+          .replace('{{song.id}}', song.id)
+        
       })
+      // console.log(Song)
+      this.$el.find('ol.list').append(Song.slice(0,8))
     }
   }
   let model = {
@@ -34,6 +38,7 @@
     },
     fetch() {
       var query = new AV.Query('Song')
+      query.descending('createdAt')
       return query.find().then((songs) => {
         this.data.songs = songs.map((song) => {
           return {
