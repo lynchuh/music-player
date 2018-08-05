@@ -3,8 +3,11 @@
 本项目包含了管理端上传页面，但由于个人账号隐私问题，暂时无法提供token实现上传功能。
 ### preview
 [项目在线演示地址](https://lynchuh.github.io/projectPreview/music-player/)
+
 <img src="./previewImg/admin.png" width="500px"/>
+
 <img src="./previewImg/index.jpg" width="250px"/><img src="./previewImg/songlist.jpg" width="250px"/>
+
 <img src="./previewImg/songPlaying.jpg" width="250px"/><img src="./previewImg/songPlaying.gif" width="250px"/>
 
 ### 项目运行
