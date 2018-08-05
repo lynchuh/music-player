@@ -9,6 +9,7 @@
 <img src="./previewImg/songPlaying.jpg" width="250px"  />
 <img src="./previewImg/songPlaying.gif" width="250px"  />
 
+[项目在线演示地址](https://lynchuh.github.io/projectPreview/music-player/)
 ### 项目运行
 ```
 git clone https://github.com/lynchuh/music-player.git
