@@ -1,5 +1,5 @@
 ## 我的云播放器
-> 这个项目是实际仿网易云的，但UI我自己找设计稿重新改了。歌曲及歌单的数据存储使用七牛和leancloud两个数据库进行部署。
+> 歌曲及歌单的数据存储使用七牛和leancloud两个数据库进行部署。
 本项目包含了管理端上传页面，但由于个人账号隐私问题，暂时无法提供token实现上传功能。
 ### preview
 [项目在线演示地址](https://lynchuh.github.io/projectPreview/music-player/)
