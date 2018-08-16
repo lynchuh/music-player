@@ -13,7 +13,7 @@
     uploadMusic(data) {
       this.audio.src = data.url
       this.$el.find('.cover')[0].src = data.cover ? data.cover : './img/song-list/list-1.jpg'
-      this.$el.find('.song-description h1').text(data.name)
+      this.$el.find('.navWrapper h1').text(data.name)
     },
     togglePlayStatus(status) {
       if (status) {
@@ -166,23 +166,31 @@
       this.model.data.id = id
     },
     bindEvent() {
+      this.view.$el.on('click','.returnBack',(e)=>{
+        e.stopPropagation()
+        window.location.href =`${window.location.origin}/src/index.html`
+      })
       this.view.$el.on('click', '.icon-wrapper', (e) => { //play/pause Btn
+        e.stopPropagation()
         this.model.data.status = !this.model.data.status
         this.view.togglePlayStatus(this.model.data.status)
       })
       this.view.$el.on('click', '.loopControl', (e) => { // loop Btn
+        e.stopPropagation()
         this.view.audio.loop = !this.view.audio.loop
         console.log(this.view.audio.loop)
         this.view.toggleLoopStatus(this.view.audio.loop)
       })
-      this.view.$el.on('click','.preBtn',(e)=>{
+      this.view.$el.on('click','.nextBtn',(e)=>{
+        e.stopPropagation()
         if(!!this.model.data.preId){
           window.location.href = `${location.origin}${location.pathname}?id=${this.model.data.preId}`
         }else{
           console.log('没有上一首')
         }
       })
-      this.view.$el.on('click','.nextBtn',(e)=>{
+      this.view.$el.on('click','.preBtn',(e)=>{
+        e.stopPropagation()
         if(!!this.model.data.nextId){
           window.location.href = `${location.origin}${location.pathname}?id=${this.model.data.nextId}`
         }else{
