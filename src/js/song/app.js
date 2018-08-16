@@ -115,11 +115,12 @@
         return song
       })
     },
-    fetchAll(x){
-      let listId 
-      if(!!x){
-        listId = AV.Object.createWithoutData('Playlist', x)
-        query.equalTo('dependent',listId)
+    fetchAll(dependent){
+      let Dependent 
+      console.log(dependent)
+      if(!!dependent){
+        Dependent = AV.Object.createWithoutData('Playlist', dependent)
+        this.query.equalTo('dependent',Dependent)
       }
       return this.query.find().then((songs)=>{
         this.data.songList=songs.map((song)=>{
@@ -137,12 +138,13 @@
       this.model = model
       this.model.init()
       this.getSongId()
+      console.log(this.model.data)
       this.model.fetch().then((data) => {
         this.view.uploadMusic(this.model.data.song) //加载歌曲信息
         this.view.drawProgressCircle(this.view.canvas) //进度条
         this.view.parseLyric(this.model.data.song.lyric) //歌词解析渲染
       })
-      this.model.fetchAll().then((e)=>{
+      this.model.fetchAll(this.model.data.dependent).then((e)=>{
         this.getPreAndNextSong(this.model.data.id,this.model.data.songList)
       })
       this.bindEvent()
@@ -154,16 +156,16 @@
       }
       let array = search.split('&').filter((v => v))
       let id = ''
+      let dependent = ''
       for (let i = 0; i < array.length; i++) {
         let kv = array[i].split('=')
         let key = kv[0]
         let value = kv[1]
-        if (key === 'id') {
-          id = value
-          break
-        }
+        key === 'id' && (id = value)
+        key === 'dependent' && (dependent= value)
       }
       this.model.data.id = id
+      this.model.data.dependent=dependent
     },
     bindEvent() {
       this.view.$el.on('click','.returnBack',(e)=>{
