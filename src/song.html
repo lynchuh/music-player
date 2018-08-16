@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>我的云音乐</title>
   <link rel="stylesheet" href="./css/song.css">
+  <script src="//at.alicdn.com/t/font_796537_bzjniq9l0ne.js"></script>
+
 </head>
 
 <body>
@@ -35,9 +38,23 @@
         </div>
       </div>
     </div>
+    <div class="control">
+      <div class="preBtn">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-preSong"></use>
+        </svg>
+      </div>
       <div class="loopControl">
-        <img src="./img/loop.png" alt="" class="loop">
-        <img src="./img/noloop.png" alt="" class="noLoop">
+        <svg class="icon" aria-hidden="true" class="loop">
+            <use xlink:href="#icon-ttpodicon"></use>
+        </svg>
+      </div>
+
+      <div class="nextBtn">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-nextSong"></use>
+        </svg>
+      </div>
     </div>
   </div>
   <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>

@@ -25,11 +25,9 @@
       }
     },
     toggleLoopStatus(status) {
-      if (status) {
-        this.$el.find('.loopControl').addClass('active')
-      } else {
-        this.$el.find('.loopControl').removeClass('active')
-      }
+      !!status && this.$el.find('.loopControl use').attr('xlink:href','#icon-danquxunhuan')
+      !status && this.$el.find('.loopControl use').attr('xlink:href','#icon-ttpodicon')
+
     },
     drawProgressCircle(canvas, percentage) {
       let radius = Math.floor($(window).width() * 44.5 / 100) * 0.5
@@ -84,7 +82,6 @@
             $currentLyric= lyrics.eq(lyrics.length-1)
           }
       }
-      // console.log(`${$currentLyric.attr('data-time')}:${$currentLyric.text()}`)
       let currentTop = $currentLyric.offset().top
       let linesTop = this.$el.find('.lyric>.lines').offset().top
       let height = currentTop - linesTop
@@ -103,26 +100,50 @@
         url: '',
         lyric: '',
       },
+      songList:[],
       status: false,
+      preId:'',
+      nextId:''
+    },
+    init(){
+      this.query=new AV.Query('Song')
     },
     fetch() {
-      var query = new AV.Query('Song')
-      return query.get(this.data.id).then((song) => {
+      this.query = new AV.Query('Song')
+      return this.query.get(this.data.id).then((song) => {
         Object.assign(this.data.song, song.attributes)
         return song
       })
     },
+    fetchAll(x){
+      let listId 
+      if(!!x){
+        listId = AV.Object.createWithoutData('Playlist', x)
+        query.equalTo('dependent',listId)
+      }
+      return this.query.find().then((songs)=>{
+        this.data.songList=songs.map((song)=>{
+          return {id:song.id,...song.attributes}
+        })
+      })
+    },
+
   }
   let controller = {
     init(view, model) {
       this.view = view
       this.view.init()
+      console.log(this.view.$el.find('.loopControl use').attr('xlink:href'))
       this.model = model
+      this.model.init()
       this.getSongId()
       this.model.fetch().then((data) => {
         this.view.uploadMusic(this.model.data.song) //加载歌曲信息
         this.view.drawProgressCircle(this.view.canvas) //进度条
         this.view.parseLyric(this.model.data.song.lyric) //歌词解析渲染
+      })
+      this.model.fetchAll().then((e)=>{
+        this.getPreAndNextSong(this.model.data.id,this.model.data.songList)
       })
       this.bindEvent()
     },
@@ -151,7 +172,22 @@
       })
       this.view.$el.on('click', '.loopControl', (e) => { // loop Btn
         this.view.audio.loop = !this.view.audio.loop
+        console.log(this.view.audio.loop)
         this.view.toggleLoopStatus(this.view.audio.loop)
+      })
+      this.view.$el.on('click','.preBtn',(e)=>{
+        if(!!this.model.data.preId){
+          window.location.href = `${location.origin}${location.pathname}?id=${this.model.data.preId}`
+        }else{
+          console.log('没有上一首')
+        }
+      })
+      this.view.$el.on('click','.nextBtn',(e)=>{
+        if(!!this.model.data.nextId){
+          window.location.href = `${location.origin}${location.pathname}?id=${this.model.data.nextId}`
+        }else{
+          console.log('没有下一首')
+        }
       })
       this.view.audio.addEventListener('ended', () => { //歌曲结束状态
         this.model.data.status = false
@@ -162,12 +198,16 @@
         let percentage = this.view.audio.currentTime / this.view.audio.duration
         this.view.drawProgressCircle(this.view.canvas, percentage)
         this.view.showLyric(this.view.audio.currentTime)
-        
       })
+      
     },
-    pad(num){
-      return num>10 ? num + '':'0'+ num
-    }
+    getPreAndNextSong(id,songList){
+      let index= songList.findIndex((song,index)=>{
+        if(song.id===id) return index
+      })
+      index!==0 && (this.model.data.preId = songList[index-1].id)
+      index !== songList.length-1 && (this.model.data.nextId = songList[index+1].id)
+    },
   }
   controller.init(view, model)
 }

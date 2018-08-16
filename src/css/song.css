@@ -130,7 +130,8 @@
 
 .song-description .lyric {
   height: 178px;
-  margin-top: 15px;
+  width: 60vw;
+  margin: 15px auto;
   /* border: 1px solid red; */
   overflow: hidden;
 }
@@ -140,28 +141,25 @@
   transition: all 0.2s;
 }
 
-.loopControl {
-  height: 10vw;width: 10vw;
-  border-radius: 50%;
-  background-color: rgba(225, 225, 225, 0.6);
+
+
+.control{
+  background-color: rgba(225, 225, 225, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);
+  margin: 2vw;
+  border-radius: 8px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  position: absolute;
-  top: 135vw;
-  left: 4vw;
+  padding: 8vw 0;
+
 }
-.loopControl img{
-  width: 8vw;
-  height: 8vw;
-  display: none;
+.control .preBtn svg,
+.control .nextBtn svg{
+  height: 16vw;
+  width: 16vw;
 }
- .loopControl.active .loop{
-  display: block;
-}
- .loopControl.active .noLoop{
-  display: none;
-}
-.loopControl .noLoop{
-  display: block;
+.control .loopControl svg{
+  height: 14vw;
+  width: 14vw;
 }
