@@ -28,9 +28,9 @@ open http://localhost:8080/src
 - 循环播放控制
 
 ### 涉及技术点
-- 使用元素js&jQuery
+- 原生js（ES6）&jQuery
 - MVC架构
-- EentHub 发布/订阅事件
+- EventHub 发布/订阅事件
 - canvas绘图
 - CSS 3 动画
 - audio媒体事件
