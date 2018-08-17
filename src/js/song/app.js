@@ -137,7 +137,7 @@
       console.log(this.view.$el.find('.loopControl use').attr('xlink:href'))
       this.model = model
       this.model.init()
-      this.getSongId()
+      this.getSongIdAndDependent()
       console.log(this.model.data)
       this.model.fetch().then((data) => {
         this.view.uploadMusic(this.model.data.song) //加载歌曲信息
@@ -149,7 +149,7 @@
       })
       this.bindEvent()
     },
-    getSongId() {
+    getSongIdAndDependent() {
       let search = window.location.search
       if (search.indexOf('?') === 0) {
         search = search.substring(1)
@@ -186,7 +186,8 @@
       this.view.$el.on('click','.nextBtn',(e)=>{
         e.stopPropagation()
         if(!!this.model.data.preId){
-          window.location.href = `${location.origin}${location.pathname}?id=${this.model.data.preId}`
+          let qureyword= !!this.model.data.dependent? `?id=${this.model.data.preId}&dependent=${this.model.data.dependent}`:`?id=${this.model.data.preId}`
+          window.location.href =`${location.origin}${location.pathname}${qureyword}`
         }else{
           console.log('没有上一首')
         }
@@ -194,7 +195,8 @@
       this.view.$el.on('click','.preBtn',(e)=>{
         e.stopPropagation()
         if(!!this.model.data.nextId){
-          window.location.href = `${location.origin}${location.pathname}?id=${this.model.data.nextId}`
+          let qureyword= !!this.model.data.dependent? `?id=${this.model.data.nextId}&dependent=${this.model.data.dependent}`:`?id=${this.model.data.nextId}`
+          window.location.href =`${location.origin}${location.pathname}${qureyword}`
         }else{
           console.log('没有下一首')
         }
