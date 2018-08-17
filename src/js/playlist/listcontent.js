@@ -5,6 +5,11 @@
       this.$el = $(this.el)
     },
     template: `
+    <div class="returnBack">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-shouye"></use>
+      </svg>
+    </div>
     <div class="backgroundWrapper">
     <div class="background"></div>
       <img src="{{cover}}" class="cover">
@@ -56,11 +61,18 @@ let controller = {
       this.view.render(this.model.data.listContent)
       // console.log(this.model.data.listContent.descript)
     })
+    this.bindEvent()
   },
   getId() {
     let search = window.location.search
     let word = search.split('=')
     this.model.data.id = word[1]
+  },
+  bindEvent(){
+    this.view.$el.on('click','.returnBack',(e)=>{
+      console.log('?')
+      window.location = `./index.html`
+    })
   }
 }
 controller.init(view, model)

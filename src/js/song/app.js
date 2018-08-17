@@ -170,7 +170,7 @@
     bindEvent() {
       this.view.$el.on('click','.returnBack',(e)=>{
         e.stopPropagation()
-        window.location.href =`${window.location.origin}/src/index.html`
+        window.location.href = !!this.model.data.dependent? `${window.location.origin}/src/playlist.html?dependent=${this.model.data.dependent}`:`${window.location.origin}/src/index.html`
       })
       this.view.$el.on('click', '.icon-wrapper', (e) => { //play/pause Btn
         e.stopPropagation()

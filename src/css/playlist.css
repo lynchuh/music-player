@@ -35,7 +35,36 @@ a {
   /* background-color: grey; */
 }
 
+
+ .returnBack{
+    height: 10vw;
+    width: 10vw;
+    position: absolute;
+    right: 3.5vw;
+    top:3.5vw;
+    border-radius:50%;
+    background-color: rgba(122, 118, 118, 0.356);
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    z-index: 1;
+  }
+
+  .returnBack svg{
+    height: 6vw;
+    width: 6vw;
+}
+
+
+
+
+
+
+
+
+
 header.listContent {
+    position: relative;
     display: flex;
   /* box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08); */
   flex-direction: column;

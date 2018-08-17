@@ -4,7 +4,7 @@
     init() {
       this.$el = $(this.el)
     },
-    template:` <li data-id="__id__">
+    template:` <li data-dependent="__dependent__">
     <img src="__cover__" >
       <div class="title"><span>__title__</span></div>
   </li>`,
@@ -12,7 +12,7 @@
       let { playlists }=data
       let Playlists=playlists.map((playlist)=>{
         return li=this.template
-        .replace('__id__',playlist.id)
+        .replace('__dependent__',playlist.dependent)
         .replace('__cover__',playlist.cover)
         .replace('__title__',playlist.title)
       })
@@ -28,7 +28,7 @@
       var query = new AV.Query('Playlist')
       return query.find().then((playlists)=>{
         this.data.playlists=playlists.map((playlist)=>{
-          return {id:playlist.id,...playlist.attributes}
+          return {dependent:playlist.id,...playlist.attributes}
         })
         return playlists
 
@@ -45,15 +45,14 @@
         this.view.render(this.model.data)
       })
       this.bindEvent()
-      this.bindEventHub()
     },
     bindEvent() {
       this.view.$el.on('click','ol.songList li',(e)=>{
-        let id= $(e.currentTarget).attr('data-id')
-        window.location = `./playlist.html?id=${id}`;
+        let dependent= $(e.currentTarget).attr('data-dependent')
+        window.location = `./playlist.html?dependent=${dependent}`;
       })
+
     },
-    bindEventHub() {},
 
 
   }
