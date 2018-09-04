@@ -37,7 +37,8 @@ open http://localhost:8080/src
 
 ### 数据处理
  - 数据结构
- ![](http://pdoyygimo.bkt.clouddn.com/3.png)
+<img src="http://pdoyygimo.bkt.clouddn.com/3.png" width="500px"/>
+
  歌曲与歌单之间是多对一关系，使用dependent来关联两者。
  
  - 页面间数据关联：使用url中的查询参数来传递歌曲id或歌单id，再使用AJAX从云端获取歌曲或歌单信息。
