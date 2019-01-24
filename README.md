@@ -2,7 +2,7 @@
 > 歌曲及歌单的数据存储使用七牛和leancloud两个数据库进行部署。
 本项目包含了管理端上传页面，但由于个人账号隐私问题，暂时无法提供token实现上传功能。
 ### preview
-[项目在线演示地址](https://lynchuh.github.io/projectPreview/music-player/)
+[项目在线演示地址](http://github.lynchuh.com/src)
 
 <img src="./previewImg/admin.png" width="500px"/>
 
@@ -15,7 +15,7 @@
 git clone https://github.com/lynchuh/music-player.git
 cd music-player
 npm install
-npm i -g http-server 
+npm i -g http-server
 http-server -c-1
 open http://localhost:8080/src
 ```
@@ -40,12 +40,12 @@ open http://localhost:8080/src
 <img src="http://pdoyygimo.bkt.clouddn.com/3.png" width="500px"/>
 
  歌曲与歌单之间是多对一关系，使用dependent来关联两者。
- 
+
  - 页面间数据关联：使用url中的查询参数来传递歌曲id或歌单id，再使用AJAX从云端获取歌曲或歌单信息。
- 
- 
+
+
  ### 最后碎碎念
- 
+
  这个算是我学习前端以来第一个算比较完整的项目，完全使用原生的JS、css、html来编写，没有引入任何框架或者工具，而是根据自己对MVC思想、模块化的理解来做，代码看起来很稚嫩甚至很挫，但其实对我来说收获挺大的，应该是它让我真正开始思考编程思维是怎样的，思考一个项目的搭建应该要怎么从大局到细节来做，也让我现在对react、Vue这些框架/库更容易接受（以前看着就头晕）
  最后，看到这里的同学们，如果对我这个项目的代码有任何建议/改进，烦请指出，感谢~
- 
+
