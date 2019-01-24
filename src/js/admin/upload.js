@@ -21,7 +21,7 @@
         runtimes: 'html5,flash,html4',
         browse_button: $targetElement.find('.uploadBtn')[0],
         uptoken_url: 'http://localhost:8888/uptoken',
-        domain: 'http://pbkpe4nsx.bkt.clouddn.com/',
+        domain: 'http://public.lynchuh.com/',
         get_new_uptoken: false,
         container: $targetElement[0],
         max_file_size: '100mb',

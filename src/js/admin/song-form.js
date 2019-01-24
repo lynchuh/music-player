@@ -29,7 +29,7 @@
       </div>
     </form>
     `,
-    render(data = {}) { 
+    render(data = {}) {
       let placeholders = ['name', 'url', 'singer','cover','lyric']
       let html = this.template
       placeholders.map((string) => {
@@ -72,7 +72,7 @@
         this.data = {
           id,
           ...attributes
-        } 
+        }
       }, (error) => {
         console.error(error.message);
       });
@@ -125,19 +125,7 @@
     },
     bindEventHub(){
       window.eventHub.on('uploaded', (data) => {
-        // if (this.model.data.id) {
-        //   console.log('1')
-        //   this.model.data = {
-        //     id: '',
-        //     name: '',
-        //     singer: '',
-        //     url: '',
-        //     lyric:'',
-        //     cover:''
-        //   }
-        // } else {
-          Object.assign(this.model.data, data)
-        // }
+        Object.assign(this.model.data, data)
         this.view.render(this.model.data)
       })
       window.eventHub.on('uploadNew',(data)=>{
